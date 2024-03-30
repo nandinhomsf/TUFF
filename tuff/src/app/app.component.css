@@ -1,0 +1,11 @@
+.toolbar-space {
+  flex: 1 1 auto;
+}
+
+.rounded-lg {
+  border-radius: 20px;
+}
+
+.m-2 {
+  margin: 2rem;
+}

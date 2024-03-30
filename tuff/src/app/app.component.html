@@ -1,0 +1,41 @@
+<mat-toolbar class="rounded-lg" color="primary">
+  <span>{{title}}</span>
+  <span class="toolbar-space"></span>
+
+  <app-theme-toggle></app-theme-toggle>
+
+  <button mat-icon-button [matMenuTriggerFor]="themeMenu">
+    <mat-icon fontIcon="format_color_fill"></mat-icon>
+  </button>
+
+  <mat-menu #themeMenu="matMenu" class="rounded-lg">
+    <button mat-menu-item *ngFor="let theme of themes" (click)="themeLoader(theme)">
+      {{ theme | translate }}
+    </button>
+  </mat-menu>
+</mat-toolbar>
+
+<mat-divider class="m-2"></mat-divider>
+
+<mat-card>
+  <button mat-button>Basic</button>
+  <button mat-button color="primary">Primary</button>
+  <button mat-button color="accent">Accent</button>
+  <button mat-button color="warn">Warn</button>
+  <button mat-button disabled>Disabled</button>
+  <button mat-raised-button>Basic</button>
+  <button mat-raised-button color="primary">Primary</button>
+  <button mat-raised-button color="accent">Accent</button>
+  <button mat-raised-button color="warn">Warn</button>
+  <button mat-raised-button disabled>Disabled</button>
+  <button mat-stroked-button>Basic</button>
+  <button mat-stroked-button color="primary">Primary</button>
+  <button mat-stroked-button color="accent">Accent</button>
+  <button mat-stroked-button color="warn">Warn</button>
+  <button mat-stroked-button disabled>Disabled</button>
+  <button mat-flat-button>Basic</button>
+  <button mat-flat-button color="primary">Primary</button>
+  <button mat-flat-button color="accent">Accent</button>
+  <button mat-flat-button color="warn">Warn</button>
+  <button mat-flat-button disabled>Disabled</button>
+</mat-card>
