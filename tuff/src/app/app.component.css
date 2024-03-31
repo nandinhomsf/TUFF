@@ -1,3 +1,22 @@
+.center.wrapper {
+  position: relative;
+}
+
+.center .inner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.wrapper {
+  height: calc(100vh - 20px);
+}
+
+.inner {
+  padding: 12px;
+}
+
 .toolbar-space {
   flex: 1 1 auto;
 }

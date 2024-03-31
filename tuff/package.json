@@ -6,7 +6,9 @@
     "start": "ng serve",
     "build": "ng build",
     "watch": "ng build --watch --configuration development",
-    "test": "ng test"
+    "test": "ng test",
+    "openapi-dev": "openapi-generator-cli generate -i http://localhost:8080/api-docs -g typescript-angular -o src/app/openapi",
+    "openapi-prod": "openapi-generator-cli generate -i https://tuff.eterniaserver.com.br/api-docs -g typescript-angular -o src/app/openapi"
   },
   "private": true,
   "dependencies": {
@@ -22,6 +24,7 @@
     "@angular/router": "^17.3.0",
     "@ngx-translate/core": "^15.0.0",
     "@ngx-translate/http-loader": "^8.0.0",
+    "@openapitools/openapi-generator-cli": "^2.13.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.14.3"

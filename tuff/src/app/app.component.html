@@ -1,3 +1,9 @@
+<div class="wrapper center" *ngIf="loading">
+  <div class="inner">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
+
 <mat-toolbar class="rounded-lg" color="primary">
   <span>{{title}}</span>
   <span class="toolbar-space"></span>
@@ -17,25 +23,4 @@
 
 <mat-divider class="m-2"></mat-divider>
 
-<mat-card>
-  <button mat-button>Basic</button>
-  <button mat-button color="primary">Primary</button>
-  <button mat-button color="accent">Accent</button>
-  <button mat-button color="warn">Warn</button>
-  <button mat-button disabled>Disabled</button>
-  <button mat-raised-button>Basic</button>
-  <button mat-raised-button color="primary">Primary</button>
-  <button mat-raised-button color="accent">Accent</button>
-  <button mat-raised-button color="warn">Warn</button>
-  <button mat-raised-button disabled>Disabled</button>
-  <button mat-stroked-button>Basic</button>
-  <button mat-stroked-button color="primary">Primary</button>
-  <button mat-stroked-button color="accent">Accent</button>
-  <button mat-stroked-button color="warn">Warn</button>
-  <button mat-stroked-button disabled>Disabled</button>
-  <button mat-flat-button>Basic</button>
-  <button mat-flat-button color="primary">Primary</button>
-  <button mat-flat-button color="accent">Accent</button>
-  <button mat-flat-button color="warn">Warn</button>
-  <button mat-flat-button disabled>Disabled</button>
-</mat-card>
+<router-outlet></router-outlet>

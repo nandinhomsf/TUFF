@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
 import {ThemeService} from "./services/theme.service";
+import {EventService} from "./services/event.service";
 
 @Component({
   selector: 'app-root',
@@ -10,6 +11,9 @@ import {ThemeService} from "./services/theme.service";
 export class AppComponent implements OnInit{
   title = 'TUFF';
 
+  loading: boolean = false;
+  logged: boolean = false;
+
   themes: Array<string> = [
     "blue",
     "green",
@@ -17,6 +21,9 @@ export class AppComponent implements OnInit{
   ];
 
   constructor(translate: TranslateService, private themeService: ThemeService) {
+    EventService.get("loading").subscribe(data => this.loading = data);
+    EventService.get("logged").subscribe(data => this.logged = data);
+
     const lang = translate.getBrowserCultureLang();
     translate.setDefaultLang('en');
 
