@@ -50,7 +50,7 @@ jobs:
           
       # 6. Copy to S3 bucket.
       - name: Copy to S3 Bucket
-        working-directory: ./tuff
+        working-directory: ./tuff/dist/tuff/browser
         run: |
-          aws s3 cp ./dist/tuff/* s3://frontend-tuff
+          aws s3 cp ./* s3://frontend-tuff
           
