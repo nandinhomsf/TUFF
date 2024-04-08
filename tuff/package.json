@@ -8,7 +8,7 @@
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "openapi-dev": "openapi-generator-cli generate -i http://localhost:8080/api-docs -g typescript-angular -o src/app/openapi",
-    "openapi-prod": "openapi-generator-cli generate -i https://tuff.eterniaserver.com.br/api-docs -g typescript-angular -o src/app/openapi"
+    "openapi-prod": "openapi-generator-cli generate -i https://api-tuff.eterniaserver.com.br/api-docs -g typescript-angular -o src/app/openapi"
   },
   "private": true,
   "dependencies": {
