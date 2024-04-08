@@ -11,19 +11,19 @@ jobs:
     name: Build and Deploy Job
     steps:
 
-      # 2. Checkout Repository
+      # 1. Checkout Repository
       - name: Checkout Repository
         uses: actions/checkout@v4
         with:
           ref: main
       
-      # 3. Setup Node
+      # 2. Setup Node
       - name: Setup Node 
         uses: actions/setup-node@v4
         with:
           node-version: '20.12.1'
           
-      # 4. Setup Cache
+      # 3. Setup Cache
       - name: Setup Cache
         uses: actions/cache@v4
         with:
@@ -53,7 +53,7 @@ jobs:
       - name: Deploy
         working-directory: ./tuff/dist/tuff/browser
         run: |
-          git chekout --orphan gh-pages
+          git checkout --orphan gh-pages
           git add .
           git commit -m "gh-pages"
           git push origin HEAD:gh-pages --force
