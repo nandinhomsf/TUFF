@@ -51,9 +51,8 @@ jobs:
 
       # 6 Deploy
       - name: Deploy
-        working-directory: ./tuff/dist/tuff/browser
         run: |
           git checkout --orphan gh-pages
-          git add . -f
-          git commit -m "gh-pages"
+          git --work-tree ./tuff/dist/tuff/browser add --all -f
+          git --work-tree ./tuff/dist/tuff/browser commit -m "gh-pages"
           git push origin HEAD:gh-pages --force
