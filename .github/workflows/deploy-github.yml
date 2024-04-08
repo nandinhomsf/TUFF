@@ -54,6 +54,6 @@ jobs:
         working-directory: ./tuff/dist/tuff/browser
         run: |
           git checkout --orphan gh-pages
-          git add .
+          git add . -f
           git commit -m "gh-pages"
           git push origin HEAD:gh-pages --force
