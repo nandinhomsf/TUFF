@@ -1,0 +1,42 @@
+:host {
+  display: flex;
+  justify-content: center;
+  margin: 128px 0;
+}
+
+mat-card {
+  width: 512px;
+}
+
+mat-form-field {
+  width: 480px;
+}
+
+mat-card-title {
+  color: white;
+}
+
+mat-card-content {
+  display: flex;
+  justify-content: center;
+}
+
+.button-div {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.link-div {
+  display: flex;
+  justify-content: center;
+}
+
+@media (max-width: 512px)  {
+  mat-card {
+    width: 90%;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+}
