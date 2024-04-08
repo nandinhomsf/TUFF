@@ -52,5 +52,5 @@ jobs:
       - name: Copy to S3 Bucket
         working-directory: ./tuff
         run: |
-          aws s3 cp ./dist/* s3://frontend-tuff
+          aws s3 cp ./dist/tuff/* s3://frontend-tuff
           
