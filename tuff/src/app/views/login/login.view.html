@@ -13,20 +13,6 @@
       </div>
 
       <mat-form-field>
-        <input type="text" matInput placeholder="Nome" formControlName="name" autocomplete="on">
-      </mat-form-field>
-      <div *ngIf="form.get('name')?.errors && form.get('name')?.touched" class="alert alert-danger small">
-        <div *ngIf="form.get('name')?.errors?.['required']">Informe seu nome</div>
-      </div>
-
-      <mat-form-field>
-        <input type="text" matInput placeholder="Sobrenome" formControlName="surname" autocomplete="on">
-      </mat-form-field>
-      <div *ngIf="form.get('surname')?.errors && form.get('surname')?.touched" class="alert alert-danger small">
-        <div *ngIf="form.get('surname')?.errors?.['required']">Informe seu sobrenome</div>
-      </div>
-
-      <mat-form-field>
         <input type="password" matInput placeholder="Senha" formControlName="password" autocomplete="on">
       </mat-form-field>
       <div *ngIf="form.get('password')?.errors && form.get('email')?.touched" class="alert alert-danger small">
@@ -34,11 +20,11 @@
       </div>
 
       <div class="button-div">
-        <button color="accent" (click)="submit()" mat-raised-button>Registro</button>
+        <button color="accent" (click)="submit()" mat-raised-button>Logar</button>
       </div>
       <br>
       <div class="button-div">
-        <button (click)="login($event)" mat-button>Logar</button>
+        <button (click)="register($event)" mat-button>Registro</button>
       </div>
     </form>
   </mat-card-content>

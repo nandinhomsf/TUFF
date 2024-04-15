@@ -3,27 +3,24 @@ import {EventService} from "../../services/event.service";
 import {FormGroup, FormControl, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {CreateUserRequest, LoginControllerService, UserAccountControllerService} from "../../openapi";
-import {TranslateService} from "@ngx-translate/core";
+import {LoginControllerService} from "../../openapi";
+import {StorageService} from "../../services/storage.service";
 
 @Component({
-  selector: "register-form",
-  templateUrl: "./register.view.html",
-  styleUrls: ["./register.view.css"],
+  selector: "login-form",
+  templateUrl: "./login.view.html",
+  styleUrls: ["./login.view.css"],
   providers: [MatSnackBar]
 })
-export class RegisterView {
+export class LoginView {
 
   public form: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.email, Validators.required]),
-    name: new FormControl('', [Validators.required]),
-    surname: new FormControl('', [Validators.required]),
     password: new FormControl('', [Validators.min(6), Validators.required])
   });
 
-  constructor(private userAccountControllerService: UserAccountControllerService,
-              private loginControllerService: LoginControllerService,
-              private translate: TranslateService,
+  constructor(private loginControllerService: LoginControllerService,
+              private storageService: StorageService,
               private snackBar: MatSnackBar,
               private router: Router) {
   }
@@ -32,26 +29,21 @@ export class RegisterView {
     if (this.form.valid) {
       EventService.get("loading").emit(true);
 
-      const lang = this.translate.getBrowserCultureLang();
-      const locale = lang && lang === "pt-BR" ? "PORTUGUESE" : "ENGLISH";
-
-      const request: CreateUserRequest = {
+      const request = {
         login: this.form.get("email")?.value,
         password: this.form.get("password")?.value,
-        name: this.form.get("name")?.value,
-        surname: this.form.get("surname")?.value,
-        locale: locale,
       };
 
-      this.userAccountControllerService
-        .create(request)
+      this.loginControllerService
+        .authenticate(request)
         .subscribe({
           next: response => {
+            this.storageService.setToken(response.tokenDto);
             EventService.get("loading").emit(false);
           },
           error: error => {
             EventService.get("loading").emit(false);
-            this.snackBar.open("Erro ao realizar registro" + error, "Fechar", {
+            this.snackBar.open("Erro ao realizar login" + error, "Fechar", {
               duration: 2000,
               horizontalPosition: "right",
               verticalPosition: "top",
@@ -61,9 +53,9 @@ export class RegisterView {
     }
   }
 
-  login(event: Event) {
+  register(event: Event) {
     event.preventDefault();
-    this.router.navigate(["login"]).then(r => r || console.info("Redirect to login failed"));
+    this.router.navigate(["register"]).then(r => r || console.info("Redirect to login failed"));
   }
 
 }

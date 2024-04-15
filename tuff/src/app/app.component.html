@@ -10,12 +10,12 @@
 
   <app-theme-toggle></app-theme-toggle>
 
-  <button mat-icon-button [matMenuTriggerFor]="themeMenu">
+  <button mat-icon-button [matMenuTriggerFor]="themeMenu" title="Select Theme">
     <mat-icon fontIcon="format_color_fill"></mat-icon>
   </button>
 
   <mat-menu #themeMenu="matMenu" class="rounded-lg">
-    <button mat-menu-item *ngFor="let theme of themes" (click)="themeLoader(theme)">
+    <button mat-menu-item *ngFor="let theme of themes" (click)="themeLoader(theme)" [title]="theme">
       {{ theme | translate }}
     </button>
   </mat-menu>
