@@ -5,7 +5,7 @@
 </div>
 
 <mat-toolbar class="rounded-lg" color="primary">
-  <span>{{title}}</span>
+  <span (click)="goToMain()" class="main-page">{{title}}</span>
   <span class="toolbar-space"></span>
 
   <app-theme-toggle></app-theme-toggle>

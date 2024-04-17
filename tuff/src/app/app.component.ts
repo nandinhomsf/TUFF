@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {TranslateService} from "@ngx-translate/core";
 import {ThemeService} from "./services/theme.service";
 import {EventService} from "./services/event.service";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-root',
@@ -20,7 +21,7 @@ export class AppComponent implements OnInit{
     "yellow",
   ];
 
-  constructor(translate: TranslateService, private themeService: ThemeService) {
+  constructor(translate: TranslateService, private themeService: ThemeService, private router: Router) {
     EventService.get("loading").subscribe(data => this.loading = data);
     EventService.get("logged").subscribe(data => this.logged = data);
 
@@ -38,6 +39,10 @@ export class AppComponent implements OnInit{
 
     this.themeLoader(theme);
     this.themeService.setDarkMode(isDarkMode === "true");
+  }
+
+  protected goToMain() {
+    this.router.navigate([""]).then(r => r || console.info("Redirect to home failed"));
   }
 
   protected themeLoader(themeEntry: string) {

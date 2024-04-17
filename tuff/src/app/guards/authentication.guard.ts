@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-import { Router } from "@angular/router";
+import {ActivatedRouteSnapshot, Router} from "@angular/router";
 import {LoginControllerService} from "../openapi";
 import {StorageService} from "../services/storage.service";
 import {catchError, map, Observable, of} from "rxjs";
@@ -11,14 +11,19 @@ export class AuthenticationGuard {
               private storageService: StorageService,
               private router: Router) {}
 
-  private navigateToLogin() {
-    this.router.navigate(["login"]).then(r => r || console.info("Redirect to login failed"));
+  private navigateToInvalid(route: ActivatedRouteSnapshot) {
+    if (route.routeConfig?.path !== "login" && route.routeConfig?.path !== "register") {
+      this.router.navigate(["login"]).then(r => r || console.info("Error when redirect"));
+    }
   }
 
-  canActivate(): Observable<boolean> | boolean {
+  canActivate(route: ActivatedRouteSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     const token = this.storageService.getToken();
-    if (!token || new Date().getMilliseconds() > token.getExpiration().getMilliseconds()) {
-      this.navigateToLogin();
+    const currentDate = new Date();
+    const expirationDate = token?.getExpiration();
+
+    if (!token || !expirationDate || currentDate > expirationDate) {
+      this.navigateToInvalid(route);
       return false;
     }
 
@@ -30,11 +35,11 @@ export class AuthenticationGuard {
           if (data.valid) {
             return true;
           }
-          this.navigateToLogin();
+          this.navigateToInvalid(route);
           return false;
         }),
-        catchError((error) => {
-          this.navigateToLogin();
+        catchError(() => {
+          this.navigateToInvalid(route);
           return of(false);
         })
       );

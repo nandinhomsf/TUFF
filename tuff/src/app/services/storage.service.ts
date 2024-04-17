@@ -1,5 +1,5 @@
 import {TokenModel} from "../models/token.model";
-import {TokenDto} from "../openapi";
+import {TokenDto, UserDto} from "../openapi";
 
 export class StorageService {
 
@@ -7,9 +7,22 @@ export class StorageService {
     return JSON.parse(tokenDtoStr);
   }
 
+  public getUser(): UserDto | undefined {
+    const userDtoStr = localStorage.getItem("userDto");
+    if (userDtoStr === null) {
+      return;
+    }
+
+    return JSON.parse(userDtoStr);
+  }
+
+  public setUser(user: UserDto) {
+    localStorage.setItem("userDto", JSON.stringify(user));
+  }
+
   public getToken(): TokenModel | undefined {
     const tokenDtoStr = localStorage.getItem("tokenModel");
-    if (tokenDtoStr == null) {
+    if (tokenDtoStr === null) {
       return;
     }
 

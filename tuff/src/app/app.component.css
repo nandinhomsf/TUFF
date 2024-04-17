@@ -2,6 +2,10 @@
   position: relative;
 }
 
+.main-page {
+  cursor: pointer;
+}
+
 .center .inner {
   position: absolute;
   top: 50%;
