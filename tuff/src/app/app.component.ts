@@ -21,7 +21,7 @@ export class AppComponent implements OnInit{
     "yellow",
   ];
 
-  constructor(translate: TranslateService, private themeService: ThemeService, private router: Router) {
+  constructor(translate: TranslateService, private router: Router) {
     EventService.get("loading").subscribe(data => this.loading = data);
     EventService.get("logged").subscribe(data => this.logged = data);
 
@@ -38,7 +38,7 @@ export class AppComponent implements OnInit{
     const isDarkMode = localStorage.getItem("dark-mode") || "true";
 
     this.themeLoader(theme);
-    this.themeService.setDarkMode(isDarkMode === "true");
+    ThemeService.setDarkMode(isDarkMode === "true");
   }
 
   protected goToMain() {

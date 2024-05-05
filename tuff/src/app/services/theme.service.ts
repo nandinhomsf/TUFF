@@ -1,21 +1,18 @@
-import { Injectable } from "@angular/core";
-
-@Injectable({providedIn: "root"})
 export class ThemeService {
-  private darkMode = false;
+  private static darkMode = false;
 
-   constructor() {
-     const isDarkMode = localStorage.getItem("dark-mode");
-     if (isDarkMode) {
-       this.darkMode = isDarkMode === "true";
-     }
-   }
+  static {
+    const isDarkMode = localStorage.getItem("dark-mode");
+    if (isDarkMode) {
+      this.darkMode = isDarkMode === "true";
+    }
+  }
 
-  isDarkMode() {
+  public static isDarkMode() {
     return this.darkMode;
   }
 
-  setDarkMode(isDarkMode: boolean) {
+  public static setDarkMode(isDarkMode: boolean) {
     this.darkMode = isDarkMode;
 
     if (isDarkMode) {

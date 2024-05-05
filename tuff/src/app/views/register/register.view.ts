@@ -3,8 +3,9 @@ import {EventService} from "../../services/event.service";
 import {FormGroup, FormControl, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {CreateUserRequest, UserAccountControllerService} from "../../openapi";
+import {CreateUserRequest} from "../../openapi";
 import {TranslateService} from "@ngx-translate/core";
+import {RegisterUseCase} from "../../usecases/register.usecase";
 
 @Component({
   selector: "register-form",
@@ -14,6 +15,8 @@ import {TranslateService} from "@ngx-translate/core";
 })
 export class RegisterView {
 
+  loading: boolean = false;
+
   public form: FormGroup = new FormGroup({
     email: new FormControl('', [Validators.email, Validators.required]),
     name: new FormControl('', [Validators.required]),
@@ -21,10 +24,10 @@ export class RegisterView {
     password: new FormControl('', [Validators.min(6), Validators.required])
   });
 
-  constructor(private userAccountControllerService: UserAccountControllerService,
+  constructor(private registerUseCase: RegisterUseCase,
               private translate: TranslateService,
-              private snackBar: MatSnackBar,
               private router: Router) {
+    EventService.get("loading").subscribe(data => this.loading = data);
   }
 
   submit() {
@@ -42,31 +45,17 @@ export class RegisterView {
         locale: locale,
       };
 
-      this.userAccountControllerService
-        .create(request)
-        .subscribe({
-          next: _ => {
-            EventService.get("loading").emit(false);
-          },
-          error: _ => {
-            EventService.get("loading").emit(false);
-            this.snackBar.open(
-              this.translate.instant("errors.register"),
-              this.translate.instant("close"),
-              {
-                duration: 2000,
-                horizontalPosition: "right",
-                verticalPosition: "top",
-              }
-            );
-          }
-        });
+      this.registerUseCase.register(request, this.home, this);
     }
   }
 
   login(event: Event) {
     event.preventDefault();
     this.router.navigate(["login"]).then(r => r || console.info("Redirect to login failed"));
+  }
+
+  private home() {
+    this.router.navigate([""]).then(r => r || console.info("Redirect to home failed"));
   }
 
 }

@@ -4,7 +4,7 @@ import {NgModule} from "@angular/core";
 import {ThemeToggleComponent} from "./components/theme-toggle/theme-toggle.component";
 import {AppComponent} from "./app.component";
 import {BrowserModule} from "@angular/platform-browser";
-import {provideRouter, RouterOutlet} from "@angular/router";
+import {provideRouter, RouterOutlet, withHashLocation} from "@angular/router";
 import {MatToolbar} from "@angular/material/toolbar";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
 import {MatButton, MatIconButton} from "@angular/material/button";
@@ -21,7 +21,6 @@ import {MatFormField} from "@angular/material/form-field";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatInput} from "@angular/material/input";
 import {APIInterceptor} from "./directives/api.interceptor";
-import {StorageService} from "./services/storage.service";
 import {LoginView} from "./views/login/login.view";
 import {ProfileView} from "./views/profile/profile.view";
 
@@ -67,17 +66,12 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     MatInput,
   ],
   providers: [
-    provideRouter(routes),
+    provideRouter(routes, withHashLocation()),
     provideAnimationsAsync(),
     {
       provide: HTTP_INTERCEPTORS,
       useClass: APIInterceptor,
       multi: true,
-    },
-    {
-      provide: StorageService,
-      useClass: StorageService,
-      multi: false,
     }
   ],
   bootstrap: [AppComponent]
