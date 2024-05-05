@@ -5,6 +5,7 @@ import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {LoginControllerService} from "../../openapi";
 import {StorageService} from "../../services/storage.service";
+import {TranslateService} from "@ngx-translate/core";
 
 @Component({
   selector: "login-form",
@@ -20,6 +21,7 @@ export class LoginView {
   });
 
   constructor(private loginControllerService: LoginControllerService,
+              private translateService: TranslateService,
               private storageService: StorageService,
               private snackBar: MatSnackBar,
               private router: Router) {
@@ -41,13 +43,17 @@ export class LoginView {
             this.storageService.setToken(response.tokenDto);
             EventService.get("loading").emit(false);
           },
-          error: error => {
+          error: _ => {
             EventService.get("loading").emit(false);
-            this.snackBar.open("Erro ao realizar login" + error, "Fechar", {
-              duration: 2000,
-              horizontalPosition: "right",
-              verticalPosition: "top",
-            });
+            this.snackBar.open(
+              this.translateService.instant("errors.login"),
+              this.translateService.instant("close"),
+              {
+                duration: 2000,
+                horizontalPosition: "right",
+                verticalPosition: "top"
+              }
+            );
           }
         });
     }

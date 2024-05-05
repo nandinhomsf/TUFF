@@ -48,11 +48,15 @@ export class ProfileView implements AfterViewInit {
           },
           error: _ => {
             EventService.get("loading").next(false);
-            this.snackBar.open("Erro ao carregar usuário", "Fechar", {
-              duration: 2000,
-              horizontalPosition: "right",
-              verticalPosition: "top",
-            });
+            this.snackBar.open(
+              this.translate.instant("errors.loadingUser"),
+              this.translate.instant("close"),
+              {
+                duration: 2000,
+                horizontalPosition: "right",
+                verticalPosition: "top"
+              }
+            );
           }
         });
     }, 10)
@@ -74,19 +78,27 @@ export class ProfileView implements AfterViewInit {
           next: response => {
             this.updateForm(response.user);
             EventService.get("loading").emit(false);
-            this.snackBar.open("Usuário atualizado", "Fechar", {
-              duration: 2000,
-              horizontalPosition: "right",
-              verticalPosition: "top",
-            });
+            this.snackBar.open(
+              this.translate.instant("success.userUpdate"),
+              this.translate.instant("close"),
+              {
+                duration: 2000,
+                horizontalPosition: "right",
+                verticalPosition: "top"
+              }
+            );
           },
           error: _ => {
             EventService.get("loading").emit(false);
-            this.snackBar.open("Erro ao atualizar dados", "Fechar", {
-              duration: 2000,
-              horizontalPosition: "right",
-              verticalPosition: "top",
-            });
+            this.snackBar.open(
+              this.translate.instant("errors.updateUser"),
+              this.translate.instant("close"),
+              {
+                duration: 2000,
+                horizontalPosition: "right",
+                verticalPosition: "top"
+              }
+            );
           }
         });
     }

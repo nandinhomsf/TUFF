@@ -2,26 +2,26 @@
   <mat-card-content>
     <form [formGroup]="form">
       <mat-form-field>
-        <input type="email" matInput placeholder="E-mail" formControlName="email" autocomplete="on">
+        <input type="email" matInput [placeholder]="'email' | translate" formControlName="email" autocomplete="on">
       </mat-form-field>
       <div *ngIf="form.get('email')?.errors && form.get('email')?.touched" class="alert alert-danger small">
-        <div *ngIf="form.get('email')?.errors?.['required']">Informe o e-mail</div>
-        <div *ngIf="form.get('email')?.errors?.['email']">Informe um e-mail valido</div>
+        <div *ngIf="form.get('email')?.errors?.['required']">{{'validations.email.required' | translate}}</div>
+        <div *ngIf="form.get('email')?.errors?.['email']">{{'validations.email.valid' | translate}}</div>
       </div>
 
       <mat-form-field>
-        <input type="password" matInput placeholder="Senha" formControlName="password" autocomplete="on">
+        <input type="password" matInput [placeholder]="'password' | translate" formControlName="password" autocomplete="on">
       </mat-form-field>
-      <div *ngIf="form.get('password')?.errors && form.get('email')?.touched" class="alert alert-danger small">
-        <div *ngIf="form.get('password')?.errors?.['required']">Informe a senha</div>
+      <div *ngIf="form.get('password')?.errors && form.get('password')?.touched" class="alert alert-danger small">
+        <div *ngIf="form.get('password')?.errors?.['required']">{{'validations.password.required' | translate}}</div>
       </div>
 
       <div class="button-div">
-        <button color="accent" (click)="submit()" mat-raised-button>Logar</button>
+        <button color="accent" (click)="submit()" mat-raised-button>{{'login' | translate}}</button>
       </div>
       <br>
       <div class="button-div">
-        <button (click)="register($event)" mat-button>Registro</button>
+        <button (click)="register($event)" mat-button>{{'register' | translate}}</button>
       </div>
     </form>
   </mat-card-content>

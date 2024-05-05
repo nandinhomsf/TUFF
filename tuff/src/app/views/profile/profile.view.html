@@ -8,21 +8,21 @@
   <mat-card-content>
     <form [formGroup]="form">
       <mat-form-field>
-        <input type="email" matInput placeholder="E-mail" formControlName="email" autocomplete="on" readonly>
+        <input type="email" matInput [placeholder]="'email' | translate" formControlName="email" autocomplete="on" readonly>
       </mat-form-field>
 
       <mat-form-field>
-        <input type="text" matInput placeholder="Nome" formControlName="name" autocomplete="on">
+        <input type="text" matInput [placeholder]="'name' | translate" formControlName="name" autocomplete="on">
       </mat-form-field>
       <div *ngIf="form.get('name')?.errors && form.get('name')?.touched" class="alert alert-danger small">
-        <div *ngIf="form.get('name')?.errors?.['required']">Informe seu nome</div>
+        <div *ngIf="form.get('name')?.errors?.['required']">{{'validations.name.required' | translate}}</div>
       </div>
 
       <mat-form-field>
-        <input type="text" matInput placeholder="Sobrenome" formControlName="surname" autocomplete="on">
+        <input type="text" matInput [placeholder]="'surname' | translate" formControlName="surname" autocomplete="on">
       </mat-form-field>
       <div *ngIf="form.get('surname')?.errors && form.get('surname')?.touched" class="alert alert-danger small">
-        <div *ngIf="form.get('surname')?.errors?.['required']">Informe seu sobrenome</div>
+        <div *ngIf="form.get('surname')?.errors?.['required']">{{'validations.surname.required' | translate}}</div>
       </div>
 
       <div class="button-div">

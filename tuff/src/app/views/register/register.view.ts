@@ -48,13 +48,17 @@ export class RegisterView {
           next: _ => {
             EventService.get("loading").emit(false);
           },
-          error: error => {
+          error: _ => {
             EventService.get("loading").emit(false);
-            this.snackBar.open("Erro ao realizar registro" + error, "Fechar", {
-              duration: 2000,
-              horizontalPosition: "right",
-              verticalPosition: "top",
-            });
+            this.snackBar.open(
+              this.translate.instant("errors.register"),
+              this.translate.instant("close"),
+              {
+                duration: 2000,
+                horizontalPosition: "right",
+                verticalPosition: "top",
+              }
+            );
           }
         });
     }
