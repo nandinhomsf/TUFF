@@ -1,10 +1,10 @@
 import {AfterViewInit, Component} from "@angular/core";
 import {EventService} from "../../services/event.service";
-import {UpdateUserRequest, UserAccountControllerService, UserDto} from "../../openapi";
+import {UpdateUserRequest, UserDto} from "../../openapi";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {TranslateService} from "@ngx-translate/core";
-import {MatSnackBar} from "@angular/material/snack-bar";
 import {StorageService} from "../../services/storage.service";
+import {UpdateUserUseCase} from "../../usecases/updateuser.usecase";
+import {ReadUserUseCase} from "../../usecases/readuser.usecase";
 
 @Component({
   selector: "profile",
@@ -21,15 +21,13 @@ export class ProfileView implements AfterViewInit {
     surname: new FormControl('', [Validators.required]),
   });
 
-  constructor(private userAccountControllerService: UserAccountControllerService,
-              private storageService: StorageService,
-              private translate: TranslateService,
-              private snackBar: MatSnackBar) {
+  constructor(private updateUserUseCase: UpdateUserUseCase,
+              private readUserUseCase: ReadUserUseCase) {
     EventService.get("loading").subscribe(data => this.loading = data);
   }
 
   private updateForm(userDto: UserDto) {
-    this.storageService.setUser(userDto);
+    StorageService.setUser(userDto);
     this.form.get("email")?.setValue(userDto.login);
     this.form.get("name")?.setValue(userDto.name);
     this.form.get("surname")?.setValue(userDto.surname);
@@ -39,26 +37,7 @@ export class ProfileView implements AfterViewInit {
     setTimeout(() => {
       EventService.get("loading").next(true)
 
-      this.userAccountControllerService
-        .read1()
-        .subscribe({
-          next: response => {
-            this.updateForm(response.userDto);
-            EventService.get("loading").next(false);
-          },
-          error: _ => {
-            EventService.get("loading").next(false);
-            this.snackBar.open(
-              this.translate.instant("errors.loadingUser"),
-              this.translate.instant("close"),
-              {
-                duration: 2000,
-                horizontalPosition: "right",
-                verticalPosition: "top"
-              }
-            );
-          }
-        });
+      this.readUserUseCase.read(this.updateForm, this);
     }, 10)
   }
 
@@ -72,35 +51,7 @@ export class ProfileView implements AfterViewInit {
         surname: this.form.get("surname")?.value,
       }
 
-      this.userAccountControllerService
-        .update(request)
-        .subscribe({
-          next: response => {
-            this.updateForm(response.user);
-            EventService.get("loading").emit(false);
-            this.snackBar.open(
-              this.translate.instant("success.userUpdate"),
-              this.translate.instant("close"),
-              {
-                duration: 2000,
-                horizontalPosition: "right",
-                verticalPosition: "top"
-              }
-            );
-          },
-          error: _ => {
-            EventService.get("loading").emit(false);
-            this.snackBar.open(
-              this.translate.instant("errors.updateUser"),
-              this.translate.instant("close"),
-              {
-                duration: 2000,
-                horizontalPosition: "right",
-                verticalPosition: "top"
-              }
-            );
-          }
-        });
+      this.updateUserUseCase.update(request, this.updateForm, this);
     }
   }
 

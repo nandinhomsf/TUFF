@@ -10,7 +10,6 @@ export class AuthenticationGuard {
 
   constructor(private userAccountControllerService: UserAccountControllerService,
               private loginControllerService: LoginControllerService,
-              private storageService: StorageService,
               private router: Router) {}
 
   private navigateToInvalid(route: ActivatedRouteSnapshot) {
@@ -26,14 +25,14 @@ export class AuthenticationGuard {
   }
 
   private setAuthorization() {
-    const token = this.storageService.getToken();
+    const token = StorageService.getToken();
 
     this.setConfiguration(this.userAccountControllerService.configuration, token);
     this.setConfiguration(this.loginControllerService.configuration, token);
   }
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    const token = this.storageService.getToken();
+    const token = StorageService.getToken();
     const currentDate = new Date();
     const expirationDate = token?.getExpiration();
 

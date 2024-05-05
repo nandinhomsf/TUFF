@@ -3,11 +3,11 @@ import {TokenDto, UserDto} from "../openapi";
 
 export class StorageService {
 
-  private tokenStrToDto(tokenDtoStr: string): TokenDto {
+  private static tokenStrToDto(tokenDtoStr: string): TokenDto {
     return JSON.parse(tokenDtoStr);
   }
 
-  public getUser(): UserDto | undefined {
+  public static getUser(): UserDto | undefined {
     const userDtoStr = localStorage.getItem("userDto");
     if (userDtoStr === null) {
       return;
@@ -16,7 +16,7 @@ export class StorageService {
     return JSON.parse(userDtoStr);
   }
 
-  public userLogin(): string  {
+  public static userLogin(): string  {
     const login = this.getToken()?.getLogin();
     if (login === undefined) {
       throw new Error("Invalid usage of userLogin()");
@@ -25,11 +25,11 @@ export class StorageService {
     return login;
   }
 
-  public setUser(user: UserDto) {
+  public static setUser(user: UserDto) {
     localStorage.setItem("userDto", JSON.stringify(user));
   }
 
-  public getToken(): TokenModel | undefined {
+  public static getToken(): TokenModel | undefined {
     const tokenDtoStr = localStorage.getItem("tokenModel");
     if (tokenDtoStr === null) {
       return;
@@ -39,7 +39,7 @@ export class StorageService {
     return new TokenModel(tokenDto.login, tokenDto.token, tokenDto.roles, new Date(tokenDto.expiration));
   }
 
-  public setToken(token: TokenDto) {
+  public static setToken(token: TokenDto) {
     localStorage.setItem("tokenModel", JSON.stringify(token));
   }
 
