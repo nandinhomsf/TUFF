@@ -42,7 +42,7 @@ export class AppComponent implements OnInit{
   }
 
   protected goToMain() {
-    this.router.navigate([""]).then(r => r || console.info("Redirect to home failed"));
+    this.router.navigate([""]).then(r => r || console.info("Redirect to profile failed"));
   }
 
   protected themeLoader(themeEntry: string) {

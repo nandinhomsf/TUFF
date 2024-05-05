@@ -3,7 +3,7 @@ import {EventService} from "../../services/event.service";
 import {FormGroup, FormControl, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {CreateUserRequest, LoginControllerService, UserAccountControllerService} from "../../openapi";
+import {CreateUserRequest, UserAccountControllerService} from "../../openapi";
 import {TranslateService} from "@ngx-translate/core";
 
 @Component({
@@ -22,7 +22,6 @@ export class RegisterView {
   });
 
   constructor(private userAccountControllerService: UserAccountControllerService,
-              private loginControllerService: LoginControllerService,
               private translate: TranslateService,
               private snackBar: MatSnackBar,
               private router: Router) {
@@ -46,7 +45,7 @@ export class RegisterView {
       this.userAccountControllerService
         .create(request)
         .subscribe({
-          next: response => {
+          next: _ => {
             EventService.get("loading").emit(false);
           },
           error: error => {

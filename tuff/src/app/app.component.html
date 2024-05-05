@@ -1,9 +1,3 @@
-<div class="wrapper center" *ngIf="loading">
-  <div class="inner">
-    <mat-spinner></mat-spinner>
-  </div>
-</div>
-
 <mat-toolbar class="rounded-lg" color="primary">
   <span (click)="goToMain()" class="main-page">{{title}}</span>
   <span class="toolbar-space"></span>
@@ -23,4 +17,9 @@
 
 <mat-divider class="m-2"></mat-divider>
 
+<div class="wrapper center" *ngIf="loading">
+  <div class="inner">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
 <router-outlet></router-outlet>

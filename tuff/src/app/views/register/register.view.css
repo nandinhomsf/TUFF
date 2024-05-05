@@ -18,10 +18,6 @@ mat-form-field {
   width: 480px;
 }
 
-mat-card-title {
-  color: white;
-}
-
 mat-card-content {
   display: flex;
   justify-content: center;

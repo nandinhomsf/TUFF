@@ -1,13 +1,15 @@
 import { Injectable } from "@angular/core";
 import {ActivatedRouteSnapshot, Router} from "@angular/router";
-import {LoginControllerService} from "../openapi";
+import {Configuration, LoginControllerService, UserAccountControllerService} from "../openapi";
 import {StorageService} from "../services/storage.service";
 import {catchError, map, Observable, of} from "rxjs";
+import {TokenModel} from "../models/token.model";
 
 @Injectable({providedIn: "root"})
 export class AuthenticationGuard {
 
-  constructor(private loginControllerService: LoginControllerService,
+  constructor(private userAccountControllerService: UserAccountControllerService,
+              private loginControllerService: LoginControllerService,
               private storageService: StorageService,
               private router: Router) {}
 
@@ -15,6 +17,19 @@ export class AuthenticationGuard {
     if (route.routeConfig?.path !== "login" && route.routeConfig?.path !== "register") {
       this.router.navigate(["login"]).then(r => r || console.info("Error when redirect"));
     }
+  }
+
+  private setConfiguration(configuration: Configuration, token: TokenModel | undefined) {
+    if (token) {
+      configuration.credentials["bearerAuth"] = token.getToken();
+    }
+  }
+
+  private setAuthorization() {
+    const token = this.storageService.getToken();
+
+    this.setConfiguration(this.userAccountControllerService.configuration, token);
+    this.setConfiguration(this.loginControllerService.configuration, token);
   }
 
   canActivate(route: ActivatedRouteSnapshot): Observable<boolean> | Promise<boolean> | boolean {
@@ -33,6 +48,7 @@ export class AuthenticationGuard {
       .pipe(
         map((data) => {
           if (data.valid) {
+            this.setAuthorization();
             return true;
           }
           this.navigateToInvalid(route);

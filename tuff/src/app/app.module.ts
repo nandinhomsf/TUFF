@@ -23,6 +23,7 @@ import {MatInput} from "@angular/material/input";
 import {APIInterceptor} from "./directives/api.interceptor";
 import {StorageService} from "./services/storage.service";
 import {LoginView} from "./views/login/login.view";
+import {ProfileView} from "./views/profile/profile.view";
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -34,6 +35,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     AppComponent,
     LoginView,
     RegisterView,
+    ProfileView,
   ],
   imports: [
     BrowserModule,
@@ -62,7 +64,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     MatCardTitle,
     MatCardHeader,
     ReactiveFormsModule,
-    MatInput
+    MatInput,
   ],
   providers: [
     provideRouter(routes),

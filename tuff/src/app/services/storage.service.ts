@@ -16,6 +16,15 @@ export class StorageService {
     return JSON.parse(userDtoStr);
   }
 
+  public userLogin(): string  {
+    const login = this.getToken()?.getLogin();
+    if (login === undefined) {
+      throw new Error("Invalid usage of userLogin()");
+    }
+
+    return login;
+  }
+
   public setUser(user: UserDto) {
     localStorage.setItem("userDto", JSON.stringify(user));
   }

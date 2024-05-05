@@ -24,6 +24,10 @@ export class TokenModel {
     return this.expiration;
   }
 
+  public getToken(): string {
+    return this.token;
+  }
+
   public getAuthenticationKey(): string {
     return "Authorization";
   }
