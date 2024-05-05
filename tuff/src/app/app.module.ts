@@ -1,4 +1,4 @@
-import {HttpClient, HttpClientModule} from "@angular/common/http";
+import {HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from "@angular/common/http";
 import {TranslateHttpLoader} from "@ngx-translate/http-loader";
 import {NgModule} from "@angular/core";
 import {ThemeToggleComponent} from "./components/theme-toggle/theme-toggle.component";
@@ -20,6 +20,10 @@ import {RegisterView} from "./views/register/register.view";
 import {MatFormField} from "@angular/material/form-field";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatInput} from "@angular/material/input";
+import {APIInterceptor} from "./directives/api.interceptor";
+import {StorageService} from "./services/storage.service";
+import {LoginView} from "./views/login/login.view";
+import {ProfileView} from "./views/profile/profile.view";
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -29,7 +33,9 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   declarations: [
     ThemeToggleComponent,
     AppComponent,
+    LoginView,
     RegisterView,
+    ProfileView,
   ],
   imports: [
     BrowserModule,
@@ -58,9 +64,22 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     MatCardTitle,
     MatCardHeader,
     ReactiveFormsModule,
-    MatInput
+    MatInput,
   ],
-  providers: [provideRouter(routes), provideAnimationsAsync()],
+  providers: [
+    provideRouter(routes),
+    provideAnimationsAsync(),
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: APIInterceptor,
+      multi: true,
+    },
+    {
+      provide: StorageService,
+      useClass: StorageService,
+      multi: false,
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

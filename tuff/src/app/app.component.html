@@ -1,21 +1,15 @@
-<div class="wrapper center" *ngIf="loading">
-  <div class="inner">
-    <mat-spinner></mat-spinner>
-  </div>
-</div>
-
 <mat-toolbar class="rounded-lg" color="primary">
-  <span>{{title}}</span>
+  <span (click)="goToMain()" class="main-page">{{title}}</span>
   <span class="toolbar-space"></span>
 
   <app-theme-toggle></app-theme-toggle>
 
-  <button mat-icon-button [matMenuTriggerFor]="themeMenu">
+  <button mat-icon-button [matMenuTriggerFor]="themeMenu" title="Select Theme">
     <mat-icon fontIcon="format_color_fill"></mat-icon>
   </button>
 
   <mat-menu #themeMenu="matMenu" class="rounded-lg">
-    <button mat-menu-item *ngFor="let theme of themes" (click)="themeLoader(theme)">
+    <button mat-menu-item *ngFor="let theme of themes" (click)="themeLoader(theme)" [title]="theme">
       {{ theme | translate }}
     </button>
   </mat-menu>
@@ -23,4 +17,9 @@
 
 <mat-divider class="m-2"></mat-divider>
 
+<div class="wrapper center" *ngIf="loading">
+  <div class="inner">
+    <mat-spinner></mat-spinner>
+  </div>
+</div>
 <router-outlet></router-outlet>

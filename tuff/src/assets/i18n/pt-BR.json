@@ -1,5 +1,38 @@
 {
   "blue": "Oceano Azul",
   "green": "Monte Verde",
-  "yellow": "Protetor Solar"
+  "yellow": "Protetor Solar",
+  "profile": "Perfil",
+  "email": "E-mail",
+  "name": "Nome",
+  "surname": "Sobrenome",
+  "password": "Senha",
+  "register": "Registro",
+  "login": "Logar",
+  "save": "Salvar",
+  "close": "Fechar",
+  "validations": {
+    "email": {
+      "required": "Informe o e-mail",
+      "valid": "Informe um e-mail válido"
+    },
+    "name": {
+      "required": "Informe seu nome"
+    },
+    "surname": {
+      "required": "Informe seu sobrenome"
+    },
+    "password": {
+      "required": "Informe a senha"
+    }
+  },
+  "success": {
+    "userUpdate": "Usuário atualizado"
+  },
+  "errors": {
+    "register": "Erro ao realizar registro",
+    "login": "Erro ao logar",
+    "loadingUser": "Erro ao carregar dados do usuário",
+    "updateUser": "Erro ao atualizar dados do usuário"
+  }
 }

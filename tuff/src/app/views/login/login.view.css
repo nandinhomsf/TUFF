@@ -4,14 +4,14 @@
   margin: 128px 0;
 }
 
-mat-card {
-  width: 512px;
-}
-
 .alert {
   margin-top: -16px;
   margin-bottom: 16px;
   color: var(--mat-app-text-color);
+}
+
+mat-card {
+  width: 512px;
 }
 
 mat-form-field {

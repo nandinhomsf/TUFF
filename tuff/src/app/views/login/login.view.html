@@ -10,20 +10,6 @@
       </div>
 
       <mat-form-field>
-        <input type="text" matInput [placeholder]="'name' | translate" formControlName="name" autocomplete="on">
-      </mat-form-field>
-      <div *ngIf="form.get('name')?.errors && form.get('name')?.touched" class="alert alert-danger small">
-        <div *ngIf="form.get('name')?.errors?.['required']">{{'validations.name.required' | translate}}</div>
-      </div>
-
-      <mat-form-field>
-        <input type="text" matInput [placeholder]="'surname' | translate" formControlName="surname" autocomplete="on">
-      </mat-form-field>
-      <div *ngIf="form.get('surname')?.errors && form.get('surname')?.touched" class="alert alert-danger small">
-        <div *ngIf="form.get('surname')?.errors?.['required']">{{'validations.surname.required' | translate}}</div>
-      </div>
-
-      <mat-form-field>
         <input type="password" matInput [placeholder]="'password' | translate" formControlName="password" autocomplete="on">
       </mat-form-field>
       <div *ngIf="form.get('password')?.errors && form.get('password')?.touched" class="alert alert-danger small">
@@ -31,11 +17,11 @@
       </div>
 
       <div class="button-div">
-        <button color="accent" (click)="submit()" mat-raised-button>{{'register' | translate}}</button>
+        <button color="accent" (click)="submit()" mat-raised-button>{{'login' | translate}}</button>
       </div>
       <br>
       <div class="button-div">
-        <button (click)="login($event)" mat-button>{{'login' | translate}}</button>
+        <button (click)="register($event)" mat-button>{{'register' | translate}}</button>
       </div>
     </form>
   </mat-card-content>

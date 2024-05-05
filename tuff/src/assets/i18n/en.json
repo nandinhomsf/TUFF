@@ -1,5 +1,38 @@
 {
   "blue": "Blue Ocean",
   "green": "Green Field",
-  "yellow": "Sundown"
+  "yellow": "Sundown",
+  "profile": "Profile",
+  "email": "Email",
+  "name": "Name",
+  "surname": "Surname",
+  "password": "Password",
+  "register": "Register",
+  "login": "Login",
+  "save": "Save",
+  "close": "Close",
+  "validations": {
+    "email": {
+      "required": "Enter email",
+      "valid": "Enter a valid email"
+    },
+    "name": {
+      "required": "Enter name"
+    },
+    "surname": {
+      "required": "Enter surname"
+    },
+    "password": {
+      "required": "Enter password"
+    }
+  },
+  "success": {
+    "userUpdate": "User updated"
+  },
+  "errors": {
+    "register": "Error on registering",
+    "login": "Error on log in",
+    "loadingUser": "Error on loading user data",
+    "updateUser": "Error on update user data"
+  }
 }

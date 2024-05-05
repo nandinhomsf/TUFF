@@ -1,21 +1,20 @@
 :host {
   display: flex;
   justify-content: center;
-  margin: 128px 0;
 }
 
-mat-card {
-  width: 512px;
-}
-
-.alert {
-  margin-top: -16px;
+mat-card-title {
   margin-bottom: 16px;
   color: var(--mat-app-text-color);
 }
 
+form {
+  margin-top: 16px;
+  width: 100%;
+}
+
 mat-form-field {
-  width: 480px;
+  width: 100%;
 }
 
 mat-card-content {
@@ -23,17 +22,12 @@ mat-card-content {
   justify-content: center;
 }
 
-.button-div {
-  display: flex;
-  justify-content: center;
+mat-card {
+  width: 1366px;
 }
 
-@media (max-width: 512px)  {
+@media (max-width: 1440px)  {
   mat-card {
     width: 90%;
-  }
-
-  mat-form-field {
-    width: 100%;
   }
 }

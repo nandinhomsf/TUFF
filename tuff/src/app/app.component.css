@@ -2,6 +2,10 @@
   position: relative;
 }
 
+.main-page {
+  cursor: pointer;
+}
+
 .center .inner {
   position: absolute;
   top: 50%;
@@ -10,7 +14,7 @@
 }
 
 .wrapper {
-  height: calc(100vh - 20px);
+  height: calc(50vh - 20px);
 }
 
 .inner {
