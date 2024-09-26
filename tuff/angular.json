@@ -33,17 +33,17 @@
             "styles": [
               "src/custom-theme.scss",
               {
-                "inject": false,
+                "inject": true,
                 "input": "src/assets/themes/green.scss",
                 "bundleName": "green"
               },
               {
-                "inject": false,
+                "inject": true,
                 "input": "src/assets/themes/blue.scss",
                 "bundleName": "blue"
               },
               {
-                "inject": false,
+                "inject": true,
                 "input": "src/assets/themes/yellow.scss",
                 "bundleName": "yellow"
               }
