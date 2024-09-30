@@ -1,0 +1,22 @@
+mat-drawer-container {
+  margin: auto;
+  border-radius: 16px;
+  width: 95%;
+}
+
+mat-drawer {
+  padding: 8px;
+  border-radius: 4px;
+  width: 256px;
+}
+
+mat-drawer-content {
+  padding: 8px;
+}
+
+button {
+  border-radius: 4px;
+  width: 100%;
+  margin-bottom: 8px;
+  justify-content: flex-start;
+}

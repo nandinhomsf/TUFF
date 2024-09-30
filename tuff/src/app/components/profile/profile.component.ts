@@ -8,10 +8,10 @@ import {ReadUserUseCase} from "../../usecases/readuser.usecase";
 
 @Component({
   selector: "profile",
-  templateUrl: "./profile.view.html",
-  styleUrls: ["./profile.view.css"],
+  templateUrl: "./profile.component.html",
+  styleUrls: ["./profile.component.css"],
 })
-export class ProfileView implements AfterViewInit {
+export class ProfileComponent implements AfterViewInit {
 
   loading: boolean = true;
 

@@ -23,11 +23,5 @@ mat-card-content {
 }
 
 mat-card {
-  width: 1366px;
-}
-
-@media (max-width: 1440px)  {
-  mat-card {
-    width: 90%;
-  }
+  width: 100%;
 }

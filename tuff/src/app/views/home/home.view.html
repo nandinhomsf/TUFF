@@ -1,0 +1,30 @@
+<mat-drawer-container>
+  <mat-drawer mode="side" opened>
+    <button color="{{buttonColor(ComponentType.RESUME)}}"
+            (click)="selectComponent(ComponentType.RESUME)"
+            mat-fab
+            extended>
+      <mat-icon>home</mat-icon>
+      {{ 'resume' | translate }}
+    </button>
+    <button color="{{buttonColor(ComponentType.PROFILE)}}"
+            (click)="selectComponent(ComponentType.PROFILE)"
+            mat-fab
+            extended>
+      <mat-icon>person</mat-icon>
+      {{ 'profile' | translate }}
+    </button>
+    <button color="{{buttonColor(ComponentType.CHALLENGES)}}"
+            (click)="selectComponent(ComponentType.CHALLENGES)"
+            mat-fab
+            extended>
+      <mat-icon>flash_on</mat-icon>
+      {{ 'challenges' | translate }}
+    </button>
+  </mat-drawer>
+  <mat-drawer-content>
+    <resume *ngIf="isSelected(ComponentType.RESUME)"></resume>
+    <profile *ngIf="isSelected(ComponentType.PROFILE)"></profile>
+    <challenges *ngIf="isSelected(ComponentType.CHALLENGES)"></challenges>
+  </mat-drawer-content>
+</mat-drawer-container>

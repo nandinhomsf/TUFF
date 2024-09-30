@@ -7,7 +7,7 @@ import {BrowserModule} from "@angular/platform-browser";
 import {provideRouter, RouterOutlet, withHashLocation} from "@angular/router";
 import {MatToolbar} from "@angular/material/toolbar";
 import {MatMenu, MatMenuItem, MatMenuTrigger} from "@angular/material/menu";
-import {MatButton, MatIconButton} from "@angular/material/button";
+import {MatButton, MatFabButton, MatIconButton} from "@angular/material/button";
 import {MatIcon} from "@angular/material/icon";
 import {NgForOf} from "@angular/common";
 import {MatDivider} from "@angular/material/divider";
@@ -17,12 +17,28 @@ import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {routes} from "./app.routes";
 import {provideAnimationsAsync} from "@angular/platform-browser/animations/async";
 import {RegisterView} from "./views/register/register.view";
-import {MatFormField} from "@angular/material/form-field";
+import {MatError, MatFormField} from "@angular/material/form-field";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatInput} from "@angular/material/input";
 import {APIInterceptor} from "./directives/api.interceptor";
 import {LoginView} from "./views/login/login.view";
-import {ProfileView} from "./views/profile/profile.view";
+import {ProfileComponent} from "./components/profile/profile.component";
+import {MatDrawerContainer, MatDrawer, MatDrawerContent} from "@angular/material/sidenav";
+import {HomeView} from "./views/home/home.view";
+import {ResumeComponent} from "./components/resume/resume.component";
+import {MatGridList, MatGridTile} from "@angular/material/grid-list";
+import {ChallengesComponent} from "./components/challenges/challenges.component";
+import {
+  MatCell, MatCellDef,
+  MatColumnDef,
+  MatHeaderCell, MatHeaderCellDef,
+  MatHeaderRow,
+  MatHeaderRowDef,
+  MatRow,
+  MatRowDef,
+  MatTable
+} from "@angular/material/table";
+import {MatPaginator} from "@angular/material/paginator";
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -32,9 +48,12 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   declarations: [
     ThemeToggleComponent,
     AppComponent,
+    ProfileComponent,
     LoginView,
     RegisterView,
-    ProfileView,
+    HomeView,
+    ResumeComponent,
+    ChallengesComponent
   ],
   imports: [
     BrowserModule,
@@ -64,6 +83,24 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     MatCardHeader,
     ReactiveFormsModule,
     MatInput,
+    MatDrawer,
+    MatDrawerContainer,
+    MatDrawerContent,
+    MatFabButton,
+    MatGridList,
+    MatGridTile,
+    MatError,
+    MatTable,
+    MatColumnDef,
+    MatHeaderCell,
+    MatCell,
+    MatPaginator,
+    MatHeaderRow,
+    MatRow,
+    MatRowDef,
+    MatHeaderRowDef,
+    MatCellDef,
+    MatHeaderCellDef
   ],
   providers: [
     provideRouter(routes, withHashLocation()),

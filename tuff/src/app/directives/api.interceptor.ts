@@ -9,8 +9,13 @@ export class APIInterceptor implements HttpInterceptor {
 
   intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     const token = StorageService.getToken();
+
     if (token) {
-      req.headers.append(token.getAuthenticationKey(), token.getAuthenticationValue());
+      const authenticationKey = token.getAuthenticationKey();
+      const authenticationValue = token.getAuthenticationValue();
+      const httpHeaders = req.headers.set(authenticationKey, authenticationValue);
+
+      req = req.clone({headers: httpHeaders});
     }
 
     return next.handle(req);

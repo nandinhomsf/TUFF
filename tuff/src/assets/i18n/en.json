@@ -11,6 +11,8 @@
   "login": "Login",
   "save": "Save",
   "close": "Close",
+  "resume": "Resume",
+  "challenges": "Challenges",
   "validations": {
     "email": {
       "required": "Enter email",
@@ -26,6 +28,11 @@
       "required": "Enter password"
     }
   },
+  "home": {
+    "instructor": {
+      "welcome": "Welcome Instructor"
+    }
+  },
   "success": {
     "userUpdate": "User updated"
   },
@@ -33,6 +40,7 @@
     "register": "Error on registering",
     "login": "Error on log in",
     "loadingUser": "Error on loading user data",
-    "updateUser": "Error on update user data"
+    "updateUser": "Error on update user data",
+    "listChallenge": "Error on listing challenges"
   }
 }

@@ -11,6 +11,8 @@
   "login": "Logar",
   "save": "Salvar",
   "close": "Fechar",
+  "resume": "Resumo",
+  "challenges": "Desafios",
   "validations": {
     "email": {
       "required": "Informe o e-mail",
@@ -26,6 +28,11 @@
       "required": "Informe a senha"
     }
   },
+  "home": {
+    "instructor": {
+      "welcome": "Bem vindo(a) Instrutor(a)"
+    }
+  },
   "success": {
     "userUpdate": "Usuário atualizado"
   },
@@ -33,6 +40,7 @@
     "register": "Erro ao realizar registro",
     "login": "Erro ao logar",
     "loadingUser": "Erro ao carregar dados do usuário",
-    "updateUser": "Erro ao atualizar dados do usuário"
+    "updateUser": "Erro ao atualizar dados do usuário",
+    "listChallenge": "Erro ao listar desafios"
   }
 }
