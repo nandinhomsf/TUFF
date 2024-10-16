@@ -1,0 +1,41 @@
+<mat-card *ngIf="!loading">
+  <mat-card-header>
+    <mat-card-title>
+      {{ 'profile' | translate }}
+    </mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+    <form [formGroup]="form">
+      <mat-grid-list cols="2" gutterSize="4px" rowHeight="70px">
+        <mat-grid-tile colspan="2">
+          <mat-form-field>
+            <input type="email" matInput [placeholder]="'email' | translate" formControlName="email" autocomplete="on" readonly>
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1">
+          <mat-form-field class="has-error">
+            <input type="text" matInput [placeholder]="'name' | translate" formControlName="name" autocomplete="on">
+            @if (form.get('name')?.errors && form.get('name')?.touched) {
+              <mat-error>{{'validations.name.required' | translate}}</mat-error>
+            }
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1">
+          <mat-form-field>
+            <input type="text" matInput [placeholder]="'surname' | translate" formControlName="surname" autocomplete="on">
+            @if (form.get('surname')?.errors && form.get('surname')?.touched) {
+              <mat-error>{{'validations.surname.required' | translate}}</mat-error>
+            }
+          </mat-form-field>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="2">
+          <button color="accent" (click)="save()" mat-raised-button>{{ 'save' | translate }}</button>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </form>
+  </mat-card-content>
+</mat-card>
