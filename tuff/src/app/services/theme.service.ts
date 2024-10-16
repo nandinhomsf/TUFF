@@ -1,3 +1,5 @@
+import {EventService} from "./event.service";
+
 export class ThemeService {
   private static darkMode = false;
 
@@ -14,6 +16,8 @@ export class ThemeService {
 
   public static setDarkMode(isDarkMode: boolean) {
     this.darkMode = isDarkMode;
+
+    EventService.get("darkMode").emit(isDarkMode);
 
     if (isDarkMode) {
       document.body.classList.add("theme-alternate");

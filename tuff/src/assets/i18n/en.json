@@ -12,6 +12,9 @@
   "save": "Save",
   "close": "Close",
   "resume": "Resume",
+  "description": "Description",
+  "code": "Code",
+  "challenge": "Challenge",
   "challenges": "Challenges",
   "validations": {
     "email": {
@@ -30,17 +33,23 @@
   },
   "home": {
     "instructor": {
-      "welcome": "Welcome Instructor"
+      "welcome": "Welcome Instructor",
+      "createChallenge": "Create Challenge"
     }
   },
   "success": {
-    "userUpdate": "User updated"
+    "userUpdate": "User updated",
+    "createOrUpdateChallenge": "Challenge created or updated successfully"
   },
   "errors": {
     "register": "Error on registering",
     "login": "Error on log in",
     "loadingUser": "Error on loading user data",
     "updateUser": "Error on update user data",
-    "listChallenge": "Error on listing challenges"
+    "listChallenge": "Error on listing challenges",
+    "readChallenge": "Error on reading challenge",
+    "createOrUpdateChallenge": "Error on creating or updating challenge",
+    "updateChallenge": "Error on updating challenge",
+    "createChallenge": "Error on creating challenge"
   }
 }

@@ -1,0 +1,56 @@
+<mat-card *ngIf="!loading">
+  <mat-card-header>
+    <mat-card-title>
+      {{ 'challenge' | translate }}
+      @if (challenge) {
+        <span>- {{challenge.name}}</span>
+      }
+    </mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+    <form [formGroup]="form">
+      <mat-grid-list cols="1" rowHeight="70px">
+        <mat-grid-tile>
+          <mat-form-field>
+            <input type="text" matInput [placeholder]="'name' | translate" formControlName="name" autocomplete="on">
+          </mat-form-field>
+        </mat-grid-tile>
+      </mat-grid-list>
+
+      <mat-grid-list cols="2" rowHeight="40vh">
+        <mat-grid-tile colspan="1">
+          <mat-card class="intern-card">
+            <mat-card-header>
+              <mat-card-title>
+                {{ 'description' | translate }}
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="intern-card-content">
+              <div class="app-ace-editor" #descriptionEditor></div>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+
+        <mat-grid-tile colspan="1">
+          <mat-card class="intern-card">
+            <mat-card-header>
+              <mat-card-title>
+                {{ 'code' | translate }}
+              </mat-card-title>
+            </mat-card-header>
+            <mat-card-content class="intern-card-content">
+              <div class="app-ace-editor" #codeEditor></div>
+            </mat-card-content>
+          </mat-card>
+        </mat-grid-tile>
+      </mat-grid-list>
+
+      <mat-grid-list cols="1" rowHeight="70px">
+        <mat-grid-tile>
+          <button color="accent" (click)="save()" mat-raised-button>{{ 'save' | translate }}</button>
+        </mat-grid-tile>
+      </mat-grid-list>
+    </form>
+  </mat-card-content>
+</mat-card>

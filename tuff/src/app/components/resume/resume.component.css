@@ -13,15 +13,6 @@ form {
   width: 100%;
 }
 
-mat-form-field {
-  width: 100%;
-}
-
-mat-card-content {
-  display: flex;
-  justify-content: center;
-}
-
 mat-card {
   width: 100%;
 }

@@ -39,6 +39,7 @@ import {
   MatTable
 } from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
+import {ChallengeView} from "./views/challenge/challenge.view";
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -53,7 +54,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     RegisterView,
     HomeView,
     ResumeComponent,
-    ChallengesComponent
+    ChallengesComponent,
+    ChallengeView
   ],
   imports: [
     BrowserModule,

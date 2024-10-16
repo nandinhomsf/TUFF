@@ -27,6 +27,5 @@ export class HomeView {
 enum ComponentType {
   RESUME = 0,
   PROFILE = 1,
-  CHALLENGES = 2,
-  REGISTER = 3
+  CHALLENGES = 2
 }
