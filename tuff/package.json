@@ -4,7 +4,7 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
-    "build": "ng build",
+    "build": "ng build && cp dist/tuff/browser/green*.css dist/tuff/browser/green.css && cp dist/tuff/browser/blue*.css dist/tuff/browser/blue.css && cp dist/tuff/browser/yellow*.css dist/tuff/browser/yellow.css",
     "watch": "ng build --watch --configuration development",
     "test": "ng test",
     "openapi-dev": "openapi-generator-cli generate -i http://localhost:8080/api-docs -g typescript-angular -o src/app/openapi",
