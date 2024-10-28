@@ -52,6 +52,14 @@
     "code": "Código do Desafio",
     "test-running": "Testando código..."
   },
+  "difficulty": {
+    "label": "Dificuldade",
+    "select": "Selecione a dificuldade",
+    "EASY": "Fácil",
+    "NORMAL": "Normal",
+    "MEDIUM": "Médio",
+    "HARD": "Difícil"
+  },
   "errors": {
     "register": "Erro ao realizar registro",
     "login": "Erro ao logar",

@@ -21,7 +21,8 @@ export class ChallengeView implements AfterViewInit {
   loading: boolean = false;
 
   public form: FormGroup = new FormGroup({
-    name: new FormControl('', [Validators.required])
+    name: new FormControl('', [Validators.required]),
+    difficulty: new FormControl('', [Validators.required]),
   });
 
   public challengeId: string | undefined;
@@ -74,6 +75,7 @@ export class ChallengeView implements AfterViewInit {
       await this.readChallengeUseCase.read(this.challengeId)
         .then((challenge) => {
           this.form.get("name")?.setValue(challenge.name);
+          this.form.get("difficulty")?.setValue(challenge.difficulty);
           this.code = challenge.code;
           this.description = challenge.description;
         })
@@ -119,6 +121,7 @@ export class ChallengeView implements AfterViewInit {
         this.form.get("name")?.value,
         this.description,
         this.code,
+        this.form.get("difficulty")?.value,
         this.challengeId
       );
     } else {

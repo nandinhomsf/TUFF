@@ -52,6 +52,14 @@
     "code": "Challenge Code",
     "test-running": "Running test..."
   },
+  "difficulty": {
+    "label": "Difficulty",
+    "select": "Select difficulty",
+    "EASY": "Easy",
+    "NORMAL": "Normal",
+    "MEDIUM": "Medium",
+    "HARD": "Hard"
+  },
   "errors": {
     "register": "Error on registering",
     "login": "Error on log in",

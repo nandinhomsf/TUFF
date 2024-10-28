@@ -19,7 +19,7 @@ export class ChallengesComponent implements AfterViewInit {
 
   loading: boolean = false;
 
-  displayedColumns: string[] = ['id', 'name', 'challengeVersion', 'run'];
+  displayedColumns: string[] = ['id', 'name', 'difficulty', 'challengeVersion', 'run'];
 
   data: ReadChallengeResponse[] = [];
 
