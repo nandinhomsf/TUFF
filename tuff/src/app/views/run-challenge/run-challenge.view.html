@@ -5,7 +5,7 @@
       <span>- {{challenge?.name}}</span>
     </mat-card-title>
     <mat-card-title class="card-container-right">
-      <button color="primary" (click)="submit()" mat-raised-button>{{ 'submit' | translate }}</button>
+      <button color="primary" (click)="submit()" mat-raised-button [disabled]="running">{{ 'submit' | translate }}</button>
     </mat-card-title>
   </mat-card-header>
   <mat-divider></mat-divider>

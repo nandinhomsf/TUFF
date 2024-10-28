@@ -20,6 +20,8 @@ export class RunChallengeView implements AfterViewInit {
 
   loading: boolean = false;
 
+  running: boolean = false;
+
   public challengeId: string | undefined;
 
   public challenge: ReadChallengeResponse | undefined;
@@ -110,6 +112,7 @@ public class MainTest {
 
   submit() {
     if (this.test) {
+      this.running = true;
       const answerRequest: CreateChallengeAnswerRequest = {
         challengeId: this.challengeId!,
         userId: StorageService.getUser()?.userId,

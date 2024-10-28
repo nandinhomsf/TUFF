@@ -6,6 +6,7 @@ import {StorageService} from "../../services/storage.service";
 import {Router} from "@angular/router";
 import {DeleteChallengeUseCase} from "../../usecases/challenge/deletechallenge.usecase";
 import {ListChallengeUseCase} from "../../usecases/challenge/listchallenge.usecase";
+import {EventService} from "../../services/event.service";
 
 @Component({
   selector: 'challenges',
@@ -15,6 +16,8 @@ import {ListChallengeUseCase} from "../../usecases/challenge/listchallenge.useca
 export class ChallengesComponent implements AfterViewInit {
 
   isAdmin: boolean = false;
+
+  loading: boolean = false;
 
   displayedColumns: string[] = ['id', 'name', 'challengeVersion', 'run'];
 
@@ -27,6 +30,8 @@ export class ChallengesComponent implements AfterViewInit {
   constructor(private router: Router,
               private listChallengeUseCase: ListChallengeUseCase,
               private deleteChallengeUseCase: DeleteChallengeUseCase) {
+    EventService.get("loading").subscribe(data => this.loading = data);
+
     if (StorageService.userAdmin()) {
       this.isAdmin = true;
       this.displayedColumns.push("challengeEdit", "challengeDelete");
