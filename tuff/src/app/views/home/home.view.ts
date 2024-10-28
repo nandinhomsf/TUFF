@@ -1,4 +1,5 @@
 import { Component } from "@angular/core";
+import {EventService} from "../../services/event.service";
 
 @Component({
   selector: "app-home",
@@ -7,7 +8,13 @@ import { Component } from "@angular/core";
 })
 export class HomeView {
 
+  loading: boolean = false;
+
   selectedComponent = ComponentType.RESUME;
+
+  constructor() {
+    EventService.get("loading").subscribe(data => this.loading = data);
+  }
 
   protected readonly ComponentType = ComponentType;
 
