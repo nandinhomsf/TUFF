@@ -2,8 +2,8 @@
   <mat-card-header>
     <mat-card-title>
       {{ 'challenge' | translate }}
-      @if (challenge) {
-        <span>- {{challenge.name}}</span>
+      @if (!!this.form.get("name")?.value) {
+        <span>- {{this.form.get("name")?.value}}</span>
       }
     </mat-card-title>
   </mat-card-header>

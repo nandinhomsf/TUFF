@@ -5,7 +5,7 @@ import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {CreateUserRequest} from "../../openapi";
 import {TranslateService} from "@ngx-translate/core";
-import {RegisterUseCase} from "../../usecases/register.usecase";
+import {RegisterUseCase} from "../../usecases/authentication/register.usecase";
 
 @Component({
   selector: "register-form",

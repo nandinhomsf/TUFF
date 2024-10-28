@@ -1,0 +1,53 @@
+<mat-card *ngIf="!loading">
+  <mat-card-header>
+    <mat-card-title class="card-container-left">
+      {{ 'challenge' | translate }}
+      <span>- {{challenge?.name}}</span>
+    </mat-card-title>
+    <mat-card-title class="card-container-right">
+      <button color="primary" (click)="submit()" mat-raised-button>{{ 'submit' | translate }}</button>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+    <mat-grid-list cols="2" rowHeight="40vh">
+      <mat-grid-tile colspan="1" rowspan="1">
+        <mat-card class="intern-card instruction">
+          <mat-card-header>
+            <mat-card-title>
+              {{ 'instructions' | translate }}
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content [innerHTML]="challenge?.description">
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="1" rowspan="2">
+        <mat-card class="intern-card">
+          <mat-card-header>
+            <mat-card-title>
+              {{ 'test' | translate }}
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="intern-card-content">
+            <div class="app-ace-editor" #testEditor></div>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="1" rowspan="1">
+        <mat-card style="width: 100%" class="intern-card">
+          <mat-card-header>
+            <mat-card-title>
+              {{ 'challenge-text.code' | translate }}
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="intern-card-content">
+            <div class="app-ace-editor" #codeReader></div>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card-content>
+</mat-card>

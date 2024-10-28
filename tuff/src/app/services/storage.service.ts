@@ -25,6 +25,12 @@ export class StorageService {
     return login;
   }
 
+  public static userAdmin(): boolean {
+    const roles = this.getUser()?.roles;
+
+    return !!roles && roles.includes("ADMIN");
+  }
+
   public static setUser(user: UserDto) {
     localStorage.setItem("userDto", JSON.stringify(user));
   }

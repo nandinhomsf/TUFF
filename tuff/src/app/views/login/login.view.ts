@@ -3,7 +3,7 @@ import {EventService} from "../../services/event.service";
 import {FormGroup, FormControl, Validators} from "@angular/forms";
 import {Router} from "@angular/router";
 import {MatSnackBar} from "@angular/material/snack-bar";
-import {LoginUseCase} from "../../usecases/login.usecase";
+import {LoginUseCase} from "../../usecases/authentication/login.usecase";
 
 @Component({
   selector: "login-form",
