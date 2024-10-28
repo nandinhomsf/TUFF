@@ -2,14 +2,14 @@ import {AfterViewInit, Component, ElementRef, ViewChild} from "@angular/core";
 import {EventService} from "../../services/event.service";
 import {ReadChallengeResponse} from "../../openapi";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {ReadChallengeUseCase} from "../../usecases/readchallenge.usecase";
-import {ActivatedRoute, Router} from "@angular/router";
+import {ReadChallengeUseCase} from "../../usecases/challenge/readchallenge.usecase";
+import {ActivatedRoute} from "@angular/router";
 
 import * as ace from "ace-builds";
 import {ThemeService} from "../../services/theme.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {TranslateService} from "@ngx-translate/core";
-import {UpsertChallengeUseCase} from "../../usecases/upsertchallenge.usecase";
+import {UpsertChallengeUseCase} from "../../usecases/challenge/upsertchallenge.usecase";
 
 @Component({
   selector: "challenge",
@@ -41,15 +41,14 @@ export class ChallengeView implements AfterViewInit {
   @ViewChild("descriptionEditor")
   private descriptionEditor!: ElementRef<HTMLElement>;
 
-  constructor(private router: Router,
-              private route: ActivatedRoute,
+  constructor(private route: ActivatedRoute,
               private snackBar: MatSnackBar,
               private translateService: TranslateService,
               private readChallengeUseCase: ReadChallengeUseCase,
               private upsertChallengeUseCase: UpsertChallengeUseCase) {
     this.route.params.subscribe(() => {
       this.route.queryParams.subscribe(params => {
-        this.challengeId = params['id'];
+        this.challengeId = params['challengeId'];
       });
     });
 
@@ -67,6 +66,10 @@ export class ChallengeView implements AfterViewInit {
   async ngAfterViewInit() {
     ace.config.set("basePath", "assets/ace");
 
+    await this.loadInformation();
+  }
+
+  async loadInformation() {
     if (this.challengeId) {
       await this.readChallengeUseCase.read(this.challengeId)
         .then((challenge) => {
@@ -104,6 +107,12 @@ export class ChallengeView implements AfterViewInit {
 
   save() {
     if (this.form.valid && this.code && this.description) {
+      const aceCodeEditor = ace.edit(this.codeEditor.nativeElement);
+      const aceDescriptionEditor = ace.edit(this.descriptionEditor.nativeElement);
+
+      this.code = aceCodeEditor.session.getValue();
+      this.description = aceDescriptionEditor.session.getValue();
+
       this.upsertChallengeUseCase.upsert(
         this.upsertCallback,
         this,
@@ -140,8 +149,10 @@ export class ChallengeView implements AfterViewInit {
       }
     );
 
-    this.router.navigate(['.'], {relativeTo: this.route, queryParams: {'id': challengeId}}).then(() => {
-      this.challengeId = challengeId;
-    });
+    console.log('callback');
+    this.challengeId = challengeId;
+    this.loadInformation().then(() => {
+      console.log('page reloaded');
+    })
   }
 }

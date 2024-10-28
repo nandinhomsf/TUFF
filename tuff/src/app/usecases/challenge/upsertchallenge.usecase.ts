@@ -1,6 +1,6 @@
-import {ChallengeControllerService, CreateChallengeRequest, UpdateChallengeRequest} from "../openapi";
+import {ChallengeControllerService, CreateChallengeRequest, UpdateChallengeRequest} from "../../openapi";
 import {TranslateService} from "@ngx-translate/core";
-import {EventService} from "../services/event.service";
+import {EventService} from "../../services/event.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Injectable} from "@angular/core";
 

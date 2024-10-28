@@ -40,6 +40,8 @@ import {
 } from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {ChallengeView} from "./views/challenge/challenge.view";
+import { MatTooltipModule } from '@angular/material/tooltip';
+import {RunChallengeView} from "./views/run-challenge/run-challenge.view";
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -55,7 +57,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     HomeView,
     ResumeComponent,
     ChallengesComponent,
-    ChallengeView
+    ChallengeView,
+    RunChallengeView
   ],
   imports: [
     BrowserModule,
@@ -102,7 +105,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     MatRowDef,
     MatHeaderRowDef,
     MatCellDef,
-    MatHeaderCellDef
+    MatHeaderCellDef,
+    MatTooltipModule
   ],
   providers: [
     provideRouter(routes, withHashLocation()),

@@ -1,0 +1,60 @@
+mat-card-title {
+  width: 100%;
+  margin-bottom: 16px;
+  color: var(--mat-app-text-color);
+}
+
+.card-container-right{
+  display: inline;
+  float: right;
+}
+
+.card-container-left{
+  display: inline;
+}
+
+form {
+  margin-top: 16px;
+  width: 100%;
+}
+
+mat-form-field {
+  width: 100%;
+}
+
+.instruction {
+  color: var(--mat-app-text-color);
+  box-shadow: none;
+}
+
+mat-card {
+  margin: auto;
+  border-radius: 16px;
+  width: 95%;
+}
+
+.description {
+  resize: none;
+  min-height:50px;
+  height: 100%;
+}
+
+.description-field {
+  height: 100%;
+  width: 100%;
+}
+
+.app-ace-editor {
+  height: 100%;
+  width: 100%;
+}
+
+.intern-card {
+  height: 100%;
+  border-radius: 4px;
+  box-shadow: none;
+}
+
+.intern-card-content {
+  height: 100%;
+}

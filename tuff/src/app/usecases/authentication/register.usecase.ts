@@ -1,6 +1,6 @@
-import {AuthenticateRequest, CreateUserRequest, UserAccountControllerService} from "../openapi";
+import {AuthenticateRequest, CreateUserRequest, UserAccountControllerService} from "../../openapi";
 import {TranslateService} from "@ngx-translate/core";
-import {EventService} from "../services/event.service";
+import {EventService} from "../../services/event.service";
 import {LoginUseCase} from "./login.usecase";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Injectable} from "@angular/core";

@@ -16,6 +16,13 @@
   "code": "Code",
   "challenge": "Challenge",
   "challenges": "Challenges",
+  "version": "Version",
+  "edit": "Edit",
+  "delete": "Delete",
+  "run": "Run",
+  "test": "Test Code",
+  "submit": "Submit",
+  "instructions": "Instructions",
   "validations": {
     "email": {
       "required": "Enter email",
@@ -41,6 +48,10 @@
     "userUpdate": "User updated",
     "createOrUpdateChallenge": "Challenge created or updated successfully"
   },
+  "challenge-text": {
+    "code": "Challenge Code",
+    "test-running": "Running test..."
+  },
   "errors": {
     "register": "Error on registering",
     "login": "Error on log in",
@@ -50,6 +61,7 @@
     "readChallenge": "Error on reading challenge",
     "createOrUpdateChallenge": "Error on creating or updating challenge",
     "updateChallenge": "Error on updating challenge",
-    "createChallenge": "Error on creating challenge"
+    "createChallenge": "Error on creating challenge",
+    "emptyTest": "Enter the test code"
   }
 }

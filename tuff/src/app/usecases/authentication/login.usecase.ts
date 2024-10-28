@@ -1,31 +1,31 @@
-import {ChallengeControllerService, ListChallengeResponse} from "../openapi";
+import {AuthenticateRequest, LoginControllerService, TokenDto} from "../../openapi";
 import {TranslateService} from "@ngx-translate/core";
-import {EventService} from "../services/event.service";
+import {StorageService} from "../../services/storage.service";
+import {EventService} from "../../services/event.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {Injectable} from "@angular/core";
 
 @Injectable({providedIn: "root"})
-export class ListChallengeUseCase {
+export class LoginUseCase {
 
-  constructor(private challengeControllerService: ChallengeControllerService,
+  constructor(private loginControllerService: LoginControllerService,
               private translateService: TranslateService,
               private snackBar: MatSnackBar) {
   }
 
-  public list(page: number, size: number, callback: ((listChallengeResponse: ListChallengeResponse) => void), context: object) {
-    EventService.get("loading").emit(true);
-
-    this.challengeControllerService
-      .list(page, size)
+  public login(request: AuthenticateRequest, callback: ((tokenDto: TokenDto) => void), context: object) {
+    this.loginControllerService
+      .authenticate(request)
       .subscribe({
         next: response => {
-          callback.call(context, response);
+          StorageService.setToken(response.tokenDto);
           EventService.get("loading").emit(false);
+          callback.call(context, response.tokenDto);
         },
         error: _ => {
           EventService.get("loading").emit(false);
           this.snackBar.open(
-            this.translateService.instant("errors.listChallenge"),
+            this.translateService.instant("errors.login"),
             this.translateService.instant("close"),
             {
               duration: 2000,
@@ -36,4 +36,5 @@ export class ListChallengeUseCase {
         }
       });
   }
+
 }

@@ -22,8 +22,8 @@ export class AppComponent implements OnInit{
   ];
 
   constructor(translate: TranslateService, private router: Router) {
-    EventService.get("loading").subscribe(data => this.loading = data);
-    EventService.get("logged").subscribe(data => this.logged = data);
+    EventService.get("loading").subscribe(data => setTimeout(() => this.loading = data, 10));
+    EventService.get("logged").subscribe(data => setTimeout(() => this.logged = data, 10));
 
     const lang = translate.getBrowserCultureLang();
     translate.setDefaultLang('en');

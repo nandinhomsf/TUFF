@@ -3,8 +3,8 @@ import {EventService} from "../../services/event.service";
 import {UpdateUserRequest, UserDto} from "../../openapi";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {StorageService} from "../../services/storage.service";
-import {UpdateUserUseCase} from "../../usecases/updateuser.usecase";
-import {ReadUserUseCase} from "../../usecases/readuser.usecase";
+import {UpdateUserUseCase} from "../../usecases/user/updateuser.usecase";
+import {ReadUserUseCase} from "../../usecases/user/readuser.usecase";
 
 @Component({
   selector: "profile",

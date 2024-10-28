@@ -1,4 +1,4 @@
-import {ChallengeControllerService, ReadChallengeResponse} from "../openapi";
+import {ChallengeControllerService, ReadChallengeResponse} from "../../openapi";
 import {Injectable} from "@angular/core";
 import {firstValueFrom} from "rxjs";
 
