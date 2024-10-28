@@ -32,9 +32,8 @@ import org.junit.jupiter.api.Test;
 public class MainTest {
 
     @Test
-    void testSum() {
+    void test() {
         Main main = new Main();
-        Assertions.assertEquals(2, main.sum(1, 1));
     }\n}`;
 
   @ViewChild("codeReader")
@@ -111,6 +110,9 @@ public class MainTest {
   }
 
   submit() {
+    const aceTestEditor = ace.edit(this.testEditor.nativeElement);
+    this.test = aceTestEditor.session.getValue();
+
     if (this.test) {
       this.running = true;
       const answerRequest: CreateChallengeAnswerRequest = {
