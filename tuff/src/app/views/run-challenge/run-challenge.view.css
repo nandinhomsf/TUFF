@@ -9,6 +9,14 @@ mat-card-title {
   float: right;
 }
 
+.overflow-y {
+  overflow-y: auto;
+}
+
+.w100 {
+  width: 100%;
+}
+
 .card-container-left{
   display: inline;
 }

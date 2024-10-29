@@ -17,7 +17,7 @@ import {MatProgressSpinner} from "@angular/material/progress-spinner";
 import {routes} from "./app.routes";
 import {provideAnimationsAsync} from "@angular/platform-browser/animations/async";
 import {RegisterView} from "./views/register/register.view";
-import {MatError, MatFormField} from "@angular/material/form-field";
+import {MatError, MatFormField, MatLabel} from "@angular/material/form-field";
 import {ReactiveFormsModule} from "@angular/forms";
 import {MatInput} from "@angular/material/input";
 import {APIInterceptor} from "./directives/api.interceptor";
@@ -40,8 +40,10 @@ import {
 } from "@angular/material/table";
 import {MatPaginator} from "@angular/material/paginator";
 import {ChallengeView} from "./views/challenge/challenge.view";
-import { MatTooltipModule } from '@angular/material/tooltip';
+import {MatTooltipModule} from '@angular/material/tooltip';
 import {RunChallengeView} from "./views/run-challenge/run-challenge.view";
+import {MatOption, MatSelect} from "@angular/material/select";
+import {RunsComponent} from "./components/runs/runs.component";
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -58,7 +60,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ResumeComponent,
     ChallengesComponent,
     ChallengeView,
-    RunChallengeView
+    RunChallengeView,
+    RunsComponent
   ],
   imports: [
     BrowserModule,
@@ -106,7 +109,10 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     MatHeaderRowDef,
     MatCellDef,
     MatHeaderCellDef,
-    MatTooltipModule
+    MatTooltipModule,
+    MatSelect,
+    MatOption,
+    MatLabel
   ],
   providers: [
     provideRouter(routes, withHashLocation()),

@@ -12,6 +12,10 @@ mat-form-field {
   width: 100%;
 }
 
+mat-form-field {
+  width: 95%;
+}
+
 mat-card {
   margin: auto;
   border-radius: 16px;

@@ -6,31 +6,23 @@ mat-card {
   position: relative;
 }
 
-.mat-column-id {
-  width: 25%;
-}
-
-.mat-column-name {
-  width: 40%;
-}
-
-.mat-column-difficulty {
+.mat-column-date {
   width: 10%;
 }
 
-.mat-column-challengeVersion {
-  width: 5%;
+.mat-column-name {
+  width: 30%;
+}
+
+.mat-column-status {
+  width: 10%;
+}
+
+.mat-column-score {
+  width: 10%;
 }
 
 .mat-column-run {
-  width: 2%;
-}
-
-.mat-column-challengeEdit {
-  width: 2%;
-}
-
-.mat-column-challengeDelete {
   width: 2%;
 }
 

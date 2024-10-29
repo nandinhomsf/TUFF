@@ -10,16 +10,25 @@
   <mat-divider></mat-divider>
   <mat-card-content>
     <form [formGroup]="form">
-      <mat-grid-list cols="1" rowHeight="70px">
-        <mat-grid-tile>
+      <mat-grid-list cols="2" rowHeight="10:1">
+        <mat-grid-tile colspan="1" rowspan="1">
           <mat-form-field>
             <input type="text" matInput [placeholder]="'name' | translate" formControlName="name" autocomplete="on">
           </mat-form-field>
         </mat-grid-tile>
-      </mat-grid-list>
+        <mat-grid-tile colspan="1" rowspan="1">
+          <mat-form-field>
+            <mat-label>{{'difficulty.select' | translate}}</mat-label>
+            <mat-select formControlName="difficulty">
+              <mat-option value="EASY">{{'difficulty.EASY' | translate}}</mat-option>
+              <mat-option value="NORMAL">{{'difficulty.NORMAL' | translate}}</mat-option>
+              <mat-option value="MEDIUM">{{'difficulty.MEDIUM' | translate}}</mat-option>
+              <mat-option value="HARD">{{'difficulty.HARD' | translate}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </mat-grid-tile>
 
-      <mat-grid-list cols="2" rowHeight="40vh">
-        <mat-grid-tile colspan="1">
+        <mat-grid-tile colspan="1" rowspan="5">
           <mat-card class="intern-card">
             <mat-card-header>
               <mat-card-title>
@@ -31,8 +40,7 @@
             </mat-card-content>
           </mat-card>
         </mat-grid-tile>
-
-        <mat-grid-tile colspan="1">
+        <mat-grid-tile colspan="1" rowspan="5">
           <mat-card class="intern-card">
             <mat-card-header>
               <mat-card-title>
@@ -44,10 +52,8 @@
             </mat-card-content>
           </mat-card>
         </mat-grid-tile>
-      </mat-grid-list>
 
-      <mat-grid-list cols="1" rowHeight="70px">
-        <mat-grid-tile>
+        <mat-grid-tile colspan="2" rowspan="1">
           <button color="accent" (click)="save()" mat-raised-button>{{ 'save' | translate }}</button>
         </mat-grid-tile>
       </mat-grid-list>
