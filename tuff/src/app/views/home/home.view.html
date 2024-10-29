@@ -21,10 +21,18 @@
       <mat-icon>flash_on</mat-icon>
       {{ 'challenges' | translate }}
     </button>
+    <button color="{{buttonColor(ComponentType.RUNNING)}}"
+            (click)="selectComponent(ComponentType.RUNNING)"
+            mat-fab
+            extended>
+      <mat-icon>sync</mat-icon>
+      {{ 'running' | translate }}
+    </button>
   </mat-drawer>
   <mat-drawer-content>
     <resume *ngIf="isSelected(ComponentType.RESUME)"></resume>
     <profile *ngIf="isSelected(ComponentType.PROFILE)"></profile>
     <challenges *ngIf="isSelected(ComponentType.CHALLENGES)"></challenges>
+    <runs *ngIf="isSelected(ComponentType.RUNNING)"></runs>
   </mat-drawer-content>
 </mat-drawer-container>

@@ -16,15 +16,6 @@ export class StorageService {
     return JSON.parse(userDtoStr);
   }
 
-  public static userLogin(): string  {
-    const login = this.getToken()?.getLogin();
-    if (login === undefined) {
-      throw new Error("Invalid usage of userLogin()");
-    }
-
-    return login;
-  }
-
   public static userAdmin(): boolean {
     const roles = this.getUser()?.roles;
 

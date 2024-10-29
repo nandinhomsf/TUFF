@@ -43,6 +43,7 @@ import {ChallengeView} from "./views/challenge/challenge.view";
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {RunChallengeView} from "./views/run-challenge/run-challenge.view";
 import {MatOption, MatSelect} from "@angular/material/select";
+import {RunsComponent} from "./components/runs/runs.component";
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -59,7 +60,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ResumeComponent,
     ChallengesComponent,
     ChallengeView,
-    RunChallengeView
+    RunChallengeView,
+    RunsComponent
   ],
   imports: [
     BrowserModule,

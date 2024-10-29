@@ -23,6 +23,10 @@
   "test": "Código do Teste",
   "submit": "Enviar",
   "instructions": "Instruções",
+  "running": "Execuções",
+  "score": "Pontuação",
+  "information": "Informações",
+  "sendAt": "Executado em",
   "validations": {
     "email": {
       "required": "Informe o e-mail",
@@ -60,12 +64,20 @@
     "MEDIUM": "Médio",
     "HARD": "Difícil"
   },
+  "status": {
+    "label": "Status",
+    "PENDING": "Pendente",
+    "PROCESSING": "Processando",
+    "CORRECT": "Correto",
+    "INCORRECT": "Incorreto"
+  },
   "errors": {
     "register": "Erro ao realizar registro",
     "login": "Erro ao logar",
     "loadingUser": "Erro ao carregar dados do usuário",
     "updateUser": "Erro ao atualizar dados do usuário",
     "listChallenge": "Erro ao listar desafios",
+    "listAnswers": "Erro ao listar respostas",
     "readChallenge": "Erro ao ler desafio",
     "createOrUpdateChallenge": "Erro ao criar ou atualizar desafio",
     "updateChallenge": "Erro ao atualizar desafio",

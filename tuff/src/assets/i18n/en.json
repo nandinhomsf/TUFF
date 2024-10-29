@@ -23,6 +23,10 @@
   "test": "Test Code",
   "submit": "Submit",
   "instructions": "Instructions",
+  "running": "Running",
+  "score": "Score",
+  "information": "Information",
+  "sendAt": "Executed At",
   "validations": {
     "email": {
       "required": "Enter email",
@@ -60,12 +64,20 @@
     "MEDIUM": "Medium",
     "HARD": "Hard"
   },
+  "status": {
+    "label": "Status",
+    "PENDING": "Pending",
+    "PROCESSING": "Processing",
+    "CORRECT": "Correct",
+    "INCORRECT": "Incorrect"
+  },
   "errors": {
     "register": "Error on registering",
     "login": "Error on log in",
     "loadingUser": "Error on loading user data",
     "updateUser": "Error on update user data",
     "listChallenge": "Error on listing challenges",
+    "listAnswers": "Error on listing answers",
     "readChallenge": "Error on reading challenge",
     "createOrUpdateChallenge": "Error on creating or updating challenge",
     "updateChallenge": "Error on updating challenge",
