@@ -39,7 +39,7 @@
           <td mat-cell *matCellDef="let row">
             <button mat-icon-button
                     color="primary"
-                    (click)="run(row.id)"
+                    (click)="information(row.challengeId, row.answerId)"
                     matTooltip="{{'information' | translate}}">
               <mat-icon fontIcon="information"></mat-icon>
             </button>

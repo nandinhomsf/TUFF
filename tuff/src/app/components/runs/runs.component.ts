@@ -59,9 +59,7 @@ export class RunsComponent implements AfterViewInit, OnDestroy {
     this.challengesLength = listAnswerResponse.total || 0;
   }
 
-  run(challengeId: string) {
-    this.router
-      .navigate(["/challenge/run"], {queryParams: {challengeId: challengeId}})
-      .then(r => r || console.info("Redirect to run challenge failed"));
+  information(challengeId: string, answerId: string) {
+
   }
 }
