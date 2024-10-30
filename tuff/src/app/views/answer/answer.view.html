@@ -1,0 +1,131 @@
+<mat-card *ngIf="!loading">
+  <mat-card-header>
+    <mat-card-title class="card-container-left">
+      {{ 'challenge' | translate }}
+      <span>- {{challenge?.name}}</span>
+    </mat-card-title>
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+    <mat-grid-list cols="8" rowHeight="6:2">
+      <mat-grid-tile colspan="1" rowspan="2">
+        <mat-form-field appearance="outline" class="field-value">
+          <mat-label>{{'score' | translate}}</mat-label>
+          <input readonly matInput placeholder="Score" value="{{result?.score?.toFixed(2)}} / 100.00">
+          <mat-icon *ngIf="(result?.score || 0) > 70" color="primary" matSuffix>thumb_up</mat-icon>
+          <mat-icon *ngIf="(result?.score || 0) <= 70" color="warning" matSuffix>thumb_down</mat-icon>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="1" rowspan="2">
+        <mat-form-field appearance="outline" class="field-value">
+          <mat-label>{{'tests' | translate}}</mat-label>
+          <input readonly matInput placeholder="Test" value="{{(result?.testsSuccess || 0)}} / {{(result?.testsFailed || 0) + (result?.testsError || 0) + (result?.testsSuccess || 0)}}">
+          <mat-icon color="primary" matSuffix>stars</mat-icon>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="1" rowspan="2">
+        <mat-form-field appearance="outline" class="field-value">
+          <mat-label>{{'instructions' | translate}}</mat-label>
+          <input readonly matInput placeholder="Instruction" value="{{(result?.instructionCoverage || 0)}} / {{(result?.instructionCoverage || 0) + (result?.instructionMissed || 0)}}">
+          <mat-icon color="primary" matSuffix>lists</mat-icon>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="1" rowspan="2">
+        <mat-form-field appearance="outline" class="field-value">
+          <mat-label>{{'branchs' | translate}}</mat-label>
+          <input readonly matInput placeholder="Branch" value="{{(result?.branchCoverage || 0)}} / {{(result?.branchCoverage || 0) + (result?.branchMissed || 0)}}">
+          <mat-icon color="primary" matSuffix>fork_left</mat-icon>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="1" rowspan="2">
+        <mat-form-field appearance="outline" class="field-value">
+          <mat-label>{{'lines' | translate}}</mat-label>
+          <input readonly matInput placeholder="Lines" value="{{(result?.lineCoverage || 0)}} / {{(result?.lineCoverage || 0) + (result?.lineMissed || 0)}}">
+          <mat-icon color="primary" matSuffix>east</mat-icon>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="1" rowspan="2">
+        <mat-form-field appearance="outline" class="field-value">
+          <mat-label>{{'complexity' | translate}}</mat-label>
+          <input readonly matInput placeholder="Complexity" value="{{(result?.complexityCoverage || 0)}} / {{(result?.complexityCoverage || 0) + (result?.complexityMissed || 0)}}">
+          <mat-icon color="primary" matSuffix>settings</mat-icon>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="1" rowspan="2">
+        <mat-form-field appearance="outline" class="field-value">
+          <mat-label>{{'methods' | translate}}</mat-label>
+          <input readonly matInput placeholder="Methods" value="{{(result?.methodCoverage || 0)}} / {{(result?.methodCoverage || 0) + (result?.methodMissed || 0)}}">
+          <mat-icon color="primary" matSuffix>functions</mat-icon>
+        </mat-form-field>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="1" rowspan="2">
+        <mat-form-field appearance="outline" class="field-value">
+          <mat-label>{{'mutations' | translate}}</mat-label>
+          <input readonly matInput placeholder="Mutations" value="{{(mutationsCoverage || 0)}} / {{(mutationsTotal || 0)}}">
+          <mat-icon color="primary" matSuffix>functions</mat-icon>
+        </mat-form-field>
+      </mat-grid-tile>
+
+    </mat-grid-list>
+
+    <!-- Challenge Area -->
+    <mat-grid-list cols="8" rowHeight="5:2">
+
+      <mat-grid-tile colspan="4" rowspan="4">
+        <mat-card class="intern-card instruction w100">
+          <mat-card-header>
+            <mat-card-title>
+              {{ 'instructions' | translate }}
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="overflow-y" [innerHTML]="challenge?.description">
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="4" rowspan="8">
+        <mat-card class="intern-card w100">
+          <mat-card-header>
+            <mat-card-title>
+              {{ 'test' | translate }}
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="intern-card-content">
+            <div class="app-ace-editor" #testReader></div>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+
+      <mat-grid-tile colspan="4" rowspan="4">
+        <mat-card class="intern-card w100">
+          <mat-card-header>
+            <mat-card-title>
+              {{ 'challenge-text.code' | translate }}
+            </mat-card-title>
+          </mat-card-header>
+          <mat-card-content class="intern-card-content">
+            <div class="app-ace-editor" #codeReader></div>
+          </mat-card-content>
+        </mat-card>
+      </mat-grid-tile>
+    </mat-grid-list>
+
+    <mat-accordion>
+      <mat-expansion-panel *ngFor="let mutation of result?.mutationResults!">
+        <mat-expansion-panel-header>
+          <mat-panel-title>{{('mutationType' | translate) + mutation.mutationType}}</mat-panel-title>
+          <mat-panel-description>{{('killedStatus' | translate) + (mutation.isKilled!.toString() | translate)}}</mat-panel-description>
+        </mat-expansion-panel-header>
+        <p>{{('mutationMethod' | translate) + mutation!.mutationInfo}}</p>
+        <p>{{('mutationLine' | translate) + mutation!.line}}</p>
+      </mat-expansion-panel>
+    </mat-accordion>
+  </mat-card-content>
+</mat-card>

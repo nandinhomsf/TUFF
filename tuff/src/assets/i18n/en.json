@@ -27,6 +27,18 @@
   "score": "Score",
   "information": "Information",
   "sendAt": "Executed At",
+  "tests": "Tests",
+  "branchs": "Branchs",
+  "lines": "Lines",
+  "complexity": "Complexity",
+  "methods": "Methods",
+  "mutations": "Mutations",
+  "mutationType": "Mutation Type: ",
+  "killedStatus": "Dead: ",
+  "true": "Yes",
+  "false": "No",
+  "mutationLine": "Mutation Line: ",
+  "mutationMethod": "Mutation Method: ",
   "validations": {
     "email": {
       "required": "Enter email",
@@ -82,6 +94,7 @@
     "createOrUpdateChallenge": "Error on creating or updating challenge",
     "updateChallenge": "Error on updating challenge",
     "createChallenge": "Error on creating challenge",
-    "emptyTest": "Enter the test code"
+    "emptyTest": "Enter the test code",
+    "errorReadingAnswer": "Error on reading challenge answer"
   }
 }
