@@ -58,6 +58,10 @@
     "instructor": {
       "welcome": "Bem vindo(a) Instrutor(a)",
       "createChallenge": "Criar Desafio"
+    },
+    "normal": {
+      "welcome": "Bem vindo(a) usuário",
+      "baseText": "Aqui você pode resolver desafios para praticar e treinar seus conhecimentos sobre testes"
     }
   },
   "success": {
