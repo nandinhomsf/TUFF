@@ -58,6 +58,10 @@
     "instructor": {
       "welcome": "Welcome Instructor",
       "createChallenge": "Create Challenge"
+    },
+    "normal": {
+      "welcome": "Welcome user",
+      "baseText": "This is a platform to test your testing skills. Good luck!"
     }
   },
   "success": {

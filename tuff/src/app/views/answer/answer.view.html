@@ -13,7 +13,7 @@
           <mat-label>{{'score' | translate}}</mat-label>
           <input readonly matInput placeholder="Score" value="{{result?.score?.toFixed(2)}} / 100.00">
           <mat-icon *ngIf="(result?.score || 0) > 70" color="primary" matSuffix>thumb_up</mat-icon>
-          <mat-icon *ngIf="(result?.score || 0) <= 70" color="warning" matSuffix>thumb_down</mat-icon>
+          <mat-icon *ngIf="(result?.score || 0) <= 70" color="warn" matSuffix>thumb_down</mat-icon>
         </mat-form-field>
       </mat-grid-tile>
 

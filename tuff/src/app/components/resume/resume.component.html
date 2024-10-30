@@ -7,16 +7,29 @@
   <mat-divider></mat-divider>
   <mat-card-content>
     <mat-grid-list cols="1" rowHeight="80px">
-      <mat-grid-tile>
-        <h1>
-          {{ 'home.instructor.welcome' | translate }}
-        </h1>
-      </mat-grid-tile>
-      <mat-grid-tile>
-        <button color="accent" (click)="createChallenge()" mat-raised-button>
-          {{ 'home.instructor.createChallenge' | translate }}
-        </button>
-      </mat-grid-tile>
+      @if (isAdmin) {
+        <mat-grid-tile>
+          <h1>
+            {{ 'home.instructor.welcome' | translate }}
+          </h1>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <button color="accent" (click)="createChallenge()" mat-raised-button>
+            {{ 'home.instructor.createChallenge' | translate }}
+          </button>
+        </mat-grid-tile>
+      } @else {
+        <mat-grid-tile>
+          <h1>
+            {{ 'home.normal.welcome' | translate }}
+          </h1>
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <p>
+            {{ 'home.normal.baseText' | translate }}
+          </p>
+        </mat-grid-tile>
+      }
     </mat-grid-list>
   </mat-card-content>
 </mat-card>

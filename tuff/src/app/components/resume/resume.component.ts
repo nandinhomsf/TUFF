@@ -1,5 +1,6 @@
 import { Component } from "@angular/core";
 import {Router} from "@angular/router";
+import {StorageService} from "../../services/storage.service";
 
 @Component({
   selector: "resume",
@@ -8,7 +9,10 @@ import {Router} from "@angular/router";
 })
 export class ResumeComponent {
 
+  public isAdmin: boolean;
+
   constructor(private router: Router) {
+    this.isAdmin = StorageService.userAdmin();
   }
 
   public createChallenge() {
