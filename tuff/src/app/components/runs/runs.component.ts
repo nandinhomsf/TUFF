@@ -60,6 +60,9 @@ export class RunsComponent implements AfterViewInit, OnDestroy {
   }
 
   information(challengeId: string, answerId: string) {
-
+    console.log("Redirect to read answer");
+    this.router
+      .navigate(["/answer"], {queryParams: {challengeId, answerId}})
+      .then(r => r || console.info("Redirect to read answer"));
   }
 }
