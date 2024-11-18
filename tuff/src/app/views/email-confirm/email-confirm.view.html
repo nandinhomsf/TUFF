@@ -1,0 +1,25 @@
+<mat-card>
+  <mat-card-header>
+    @if (email) {
+      <mat-card-title>{{ 'confirmEmail' | translate }}</mat-card-title>
+    } @else if (error) {
+      <mat-card-title>{{ 'expiredToken' | translate }}</mat-card-title>
+    }
+  </mat-card-header>
+  <mat-divider></mat-divider>
+  <mat-card-content>
+    @if (email) {
+      {{ 'confirmationEmail' | translate }} {{email}}
+    } @else if (error) {
+      <mat-grid-list cols="1" rowHeight="42px" style="width: 100%">
+        <mat-grid-tile>
+          {{ 'expiredTokenMessage' | translate }}
+        </mat-grid-tile>
+        <mat-grid-tile>
+          <button color="accent" (click)="redirectToLogin()" mat-raised-button>{{'login' | translate}}</button>
+        </mat-grid-tile>
+      </mat-grid-list>
+      <mat-divider></mat-divider>
+    }
+  </mat-card-content>
+</mat-card>

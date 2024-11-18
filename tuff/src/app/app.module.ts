@@ -51,6 +51,7 @@ import {
   MatExpansionPanelHeader,
   MatExpansionPanelTitle
 } from "@angular/material/expansion";
+import {EmailConfirmView} from "./views/email-confirm/email-confirm.view";
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -64,6 +65,7 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     LoginView,
     RegisterView,
     HomeView,
+    EmailConfirmView,
     ResumeComponent,
     ChallengesComponent,
     ChallengeView,

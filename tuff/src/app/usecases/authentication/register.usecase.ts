@@ -14,13 +14,13 @@ export class RegisterUseCase {
               private snackBar: MatSnackBar) {
   }
 
-  public register(request: CreateUserRequest, callback: (() => void), context: object) {
+  public register(request: CreateUserRequest, context: object) {
     this.userAccountControllerService
       .create(request)
       .subscribe({
         next: _ => {
           const loginRequest: AuthenticateRequest = {login: request.login, password: request.password}
-          this.loginUseCase.login(loginRequest, callback, context);
+          this.loginUseCase.login(loginRequest, () => ({}), context);
         },
         error: _ => {
           EventService.get("loading").emit(false);

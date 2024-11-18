@@ -39,6 +39,11 @@
   "false": "No",
   "mutationLine": "Mutation Line: ",
   "mutationMethod": "Mutation Method: ",
+  "confirmationEmail": "Confirmation email sent to: ",
+  "confirmEmail": "Confirm your email before continue",
+  "expiredToken": "Expired token",
+  "expiredTokenMessage": "Your token has expired, please login again to generate a new token",
+  "passwordForgot": "Forgot password",
   "validations": {
     "email": {
       "required": "Enter email",

@@ -8,12 +8,14 @@ import {TokenModel} from "../models/token.model";
 @Injectable({providedIn: "root"})
 export class AuthenticationGuard {
 
+  private readonly validNegate: Set<string> = new Set(["login", "register", "email-confirm"]);
+
   constructor(private userAccountControllerService: UserAccountControllerService,
               private loginControllerService: LoginControllerService,
               private router: Router) {}
 
   private navigateToInvalid(route: ActivatedRouteSnapshot) {
-    if (route.routeConfig?.path !== "login" && route.routeConfig?.path !== "register") {
+    if (!this.validNegate.has(route.routeConfig?.path!)) {
       this.router.navigate(["login"]).then(r => r || console.info("Error when redirect"));
     }
   }
