@@ -39,6 +39,11 @@
   "false": "Não",
   "mutationLine": "Linha do Mutante: ",
   "mutationMethod": "Método do Mutante: ",
+  "confirmationEmail": "E-mail de confirmação enviado para: ",
+  "confirmEmail": "Confirme o seu e-mail antes de continuar",
+  "expiredToken": "Token expirado",
+  "expiredTokenMessage": "Seu token expirou, por favor faça login novamente para gerar um novo token",
+  "passwordForgot": "Esqueci minha senha",
   "validations": {
     "email": {
       "required": "Informe o e-mail",

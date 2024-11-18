@@ -45,17 +45,13 @@ export class RegisterView {
         locale: locale,
       };
 
-      this.registerUseCase.register(request, this.home, this);
+      this.registerUseCase.register(request, this);
     }
   }
 
   login(event: Event) {
     event.preventDefault();
     this.router.navigate(["login"]).then(r => r || console.info("Redirect to login failed"));
-  }
-
-  private home() {
-    this.router.navigate([""]).then(r => r || console.info("Redirect to home failed"));
   }
 
 }

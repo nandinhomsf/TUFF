@@ -1,7 +1,7 @@
 import {EventService} from "./event.service";
 
 export class ThemeService {
-  private static darkMode = false;
+  private static darkMode = true;
 
   static {
     const isDarkMode = localStorage.getItem("dark-mode");
