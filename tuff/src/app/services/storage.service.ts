@@ -26,6 +26,11 @@ export class StorageService {
     localStorage.setItem("userDto", JSON.stringify(user));
   }
 
+  public static removeUser() {
+    localStorage.removeItem("userDto");
+    localStorage.removeItem("tokenModel");
+  }
+
   public static getToken(): TokenModel | undefined {
     const tokenDtoStr = localStorage.getItem("tokenModel");
     if (tokenDtoStr === null) {

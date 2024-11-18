@@ -39,6 +39,7 @@ export class AuthenticationGuard {
     const expirationDate = token?.getExpiration();
 
     if (!token || !expirationDate || currentDate > expirationDate) {
+      StorageService.removeUser()
       this.navigateToInvalid(route);
       return false;
     }
