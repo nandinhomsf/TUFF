@@ -69,7 +69,7 @@
         <mat-form-field appearance="outline" class="field-value">
           <mat-label>{{'mutations' | translate}}</mat-label>
           <input readonly matInput placeholder="Mutations" value="{{(mutationsCoverage || 0)}} / {{(mutationsTotal || 0)}}">
-          <mat-icon color="primary" matSuffix>functions</mat-icon>
+          <mat-icon color="primary" matSuffix>face_5</mat-icon>
         </mat-form-field>
       </mat-grid-tile>
 
@@ -117,6 +117,7 @@
       </mat-grid-tile>
     </mat-grid-list>
 
+    <!-- Comentado para avaliar depois
     <mat-accordion>
       <mat-expansion-panel *ngFor="let mutation of result?.mutationResults!">
         <mat-expansion-panel-header>
@@ -127,5 +128,6 @@
         <p>{{('mutationLine' | translate) + mutation!.line}}</p>
       </mat-expansion-panel>
     </mat-accordion>
+    -->
   </mat-card-content>
 </mat-card>
