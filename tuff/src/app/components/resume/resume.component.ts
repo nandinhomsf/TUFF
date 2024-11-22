@@ -1,4 +1,4 @@
-import { Component } from "@angular/core";
+import {Component, OnInit} from "@angular/core";
 import {Router} from "@angular/router";
 import {StorageService} from "../../services/storage.service";
 
@@ -7,11 +7,14 @@ import {StorageService} from "../../services/storage.service";
   templateUrl: "./resume.component.html",
   styleUrl: "./resume.component.css"
 })
-export class ResumeComponent {
+export class ResumeComponent implements OnInit {
 
-  public isAdmin: boolean;
+  public isAdmin: boolean = false;
 
   constructor(private router: Router) {
+  }
+
+  ngOnInit(): void {
     this.isAdmin = StorageService.userAdmin();
   }
 
