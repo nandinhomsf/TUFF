@@ -1,7 +1,6 @@
 import {AfterViewInit, Component, ElementRef, ViewChild} from "@angular/core";
 import {EventService} from "../../services/event.service";
 import {CreateChallengeAnswerRequest, ReadChallengeResponse} from "../../openapi";
-import {ReadChallengeUseCase} from "../../usecases/challenge/readchallenge.usecase";
 import {ActivatedRoute, Router} from "@angular/router";
 
 import * as ace from "ace-builds";
@@ -10,6 +9,7 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {TranslateService} from "@ngx-translate/core";
 import {AnswersUseCase} from "../../usecases/answers.usecase";
 import {StorageService} from "../../services/storage.service";
+import {ChallengeUseCase} from "../../usecases/challenge.usecase";
 
 @Component({
   selector: "run-challenge",
@@ -47,7 +47,7 @@ public class MainTest {
               private snackBar: MatSnackBar,
               private answersUseCase: AnswersUseCase,
               private translateService: TranslateService,
-              private readChallengeUseCase: ReadChallengeUseCase) {
+              private challengeUseCase: ChallengeUseCase) {
     this.route.params.subscribe(() => {
       this.route.queryParams.subscribe(params => {
         this.challengeId = params['challengeId'];
@@ -72,7 +72,7 @@ public class MainTest {
   }
 
   async loadInformation() {
-    const valid = await this.readChallengeUseCase.read(this.challengeId!)
+    const valid = await this.challengeUseCase.get(this.challengeId!)
       .then((challenge) => {
         this.challenge = challenge;
         return true;

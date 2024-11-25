@@ -2,14 +2,13 @@ import {AfterViewInit, Component, ElementRef, ViewChild} from "@angular/core";
 import {EventService} from "../../services/event.service";
 import {ReadChallengeResponse} from "../../openapi";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
-import {ReadChallengeUseCase} from "../../usecases/challenge/readchallenge.usecase";
 import {ActivatedRoute} from "@angular/router";
 
 import * as ace from "ace-builds";
 import {ThemeService} from "../../services/theme.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {TranslateService} from "@ngx-translate/core";
-import {UpsertChallengeUseCase} from "../../usecases/challenge/upsertchallenge.usecase";
+import {ChallengeUseCase} from "../../usecases/challenge.usecase";
 
 @Component({
   selector: "challenge",
@@ -45,8 +44,7 @@ export class ChallengeView implements AfterViewInit {
   constructor(private route: ActivatedRoute,
               private snackBar: MatSnackBar,
               private translateService: TranslateService,
-              private readChallengeUseCase: ReadChallengeUseCase,
-              private upsertChallengeUseCase: UpsertChallengeUseCase) {
+              private challengeUseCase: ChallengeUseCase) {
     this.route.params.subscribe(() => {
       this.route.queryParams.subscribe(params => {
         this.challengeId = params['challengeId'];
@@ -72,7 +70,7 @@ export class ChallengeView implements AfterViewInit {
 
   async loadInformation() {
     if (this.challengeId) {
-      await this.readChallengeUseCase.read(this.challengeId)
+      await this.challengeUseCase.get(this.challengeId)
         .then((challenge) => {
           this.form.get("name")?.setValue(challenge.name);
           this.form.get("difficulty")?.setValue(challenge.difficulty);
@@ -115,15 +113,34 @@ export class ChallengeView implements AfterViewInit {
       this.code = aceCodeEditor.session.getValue();
       this.description = aceDescriptionEditor.session.getValue();
 
-      this.upsertChallengeUseCase.upsert(
-        this.upsertCallback,
-        this,
-        this.form.get("name")?.value,
-        this.description,
-        this.code,
-        this.form.get("difficulty")?.value,
-        this.challengeId
-      );
+      EventService.get("loading").next(true);
+
+      this.challengeUseCase
+        .upsert(
+          this.form.get("name")?.value,
+          this.description,
+          this.code,
+          this.form.get("difficulty")?.value,
+          this.challengeId
+        )
+        .then(challengeId => {
+          this.snackBar.open(
+            this.translateService.instant("success.createOrUpdateChallenge"),
+            this.translateService.instant("close"),
+            {duration: 2000, horizontalPosition: "right", verticalPosition: "top"}
+          );
+
+          this.challengeId = challengeId;
+          this.loadInformation().then(() => console.log('page reloaded'));
+        })
+        .catch(() => {
+          this.snackBar.open(
+            this.translateService.instant("errors.createOrUpdateChallenge"),
+            this.translateService.instant("close"),
+            {duration: 2000, horizontalPosition: "right", verticalPosition: "top"}
+          );
+        })
+        .finally(() => EventService.get("loading").next(false));
     } else {
       this.snackBar.open(
         this.translateService.instant("errors.createOrUpdateChallenge"),
@@ -139,23 +156,5 @@ export class ChallengeView implements AfterViewInit {
 
   private setAceTheme(aceEditor: ace.Ace.Editor, darkMode: boolean) {
     aceEditor.setTheme("ace/theme/" + (darkMode ? "merbivore" : "github"));
-  }
-
-  private upsertCallback(challengeId: string) {
-    this.snackBar.open(
-      this.translateService.instant("success.createOrUpdateChallenge"),
-      this.translateService.instant("close"),
-      {
-        duration: 2000,
-        horizontalPosition: "right",
-        verticalPosition: "top"
-      }
-    );
-
-    console.log('callback');
-    this.challengeId = challengeId;
-    this.loadInformation().then(() => {
-      console.log('page reloaded');
-    })
   }
 }

@@ -1,12 +1,13 @@
 import {AfterViewInit, Component, ViewChild} from '@angular/core';
 import {MatPaginator} from "@angular/material/paginator";
-import {ListChallengeResponse, ReadChallengeResponse} from "../../openapi";
+import {ReadChallengeResponse} from "../../openapi";
 import {startWith} from "rxjs";
 import {StorageService} from "../../services/storage.service";
 import {Router} from "@angular/router";
-import {DeleteChallengeUseCase} from "../../usecases/challenge/deletechallenge.usecase";
-import {ListChallengeUseCase} from "../../usecases/challenge/listchallenge.usecase";
 import {EventService} from "../../services/event.service";
+import {ChallengeUseCase} from "../../usecases/challenge.usecase";
+import {TranslateService} from "@ngx-translate/core";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: 'challenges',
@@ -28,8 +29,9 @@ export class ChallengesComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private router: Router,
-              private listChallengeUseCase: ListChallengeUseCase,
-              private deleteChallengeUseCase: DeleteChallengeUseCase) {
+              private snackBar: MatSnackBar,
+              private translateService: TranslateService,
+              private challengeUseCase: ChallengeUseCase) {
     EventService.get("loading").subscribe(data => this.loading = data);
 
     if (StorageService.userAdmin()) {
@@ -39,16 +41,32 @@ export class ChallengesComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    this.paginator.page
-      .pipe(startWith({pageIndex: 0, pageSize: 10}))
-      .subscribe(page => {
-        this.listChallengeUseCase.list(page.pageIndex, page.pageSize, this.updateChallenges, this);
-      });
+    setTimeout(() => {
+      this.paginator.page
+        .pipe(startWith({pageIndex: 0, pageSize: 10}))
+        .subscribe(page => {
+          EventService.get("loading").emit(true);
+
+          this.updateChallenges(page.pageIndex, page.pageSize)
+            .finally(() => EventService.get("loading").emit(false));
+        });
+    }, 10);
   }
 
-  updateChallenges(listChallengeResponse: ListChallengeResponse) {
-    this.data = listChallengeResponse.challenges || [];
-    this.challengesLength = listChallengeResponse.totalEntries || 0;
+  async updateChallenges(index: number, size: number) {
+    await this.challengeUseCase
+      .list(index, size)
+      .then(response => {
+        this.data = response.challenges || [];
+        this.challengesLength = response.totalEntries || 0;
+      })
+      .catch(() => {
+        this.snackBar.open(
+          this.translateService.instant("errors.listChallenge"),
+          this.translateService.instant("close"),
+          {duration: 2000, horizontalPosition: "right", verticalPosition: "top"}
+        );
+      });
   }
 
   run(challengeId: string) {
@@ -64,8 +82,12 @@ export class ChallengesComponent implements AfterViewInit {
   }
 
   delete(challengeId: string) {
-    this.deleteChallengeUseCase.delete(challengeId)
-      .then(() => this.listChallengeUseCase.list(0, 10, this.updateChallenges, this))
-      .catch(() => console.error("Delete challenge failed"));
+    EventService.get("loading").emit(true);
+
+    this.challengeUseCase
+      .delete(challengeId)
+      .then(() => this.updateChallenges(0, 10))
+      .catch(() => console.error("Delete challenge failed"))
+      .finally(() => EventService.get("loading").emit(false));
   }
 }
