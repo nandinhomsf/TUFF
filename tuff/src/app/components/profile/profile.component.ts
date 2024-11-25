@@ -3,8 +3,9 @@ import {EventService} from "../../services/event.service";
 import {UpdateUserRequest, UserDto} from "../../openapi";
 import {FormControl, FormGroup, Validators} from "@angular/forms";
 import {StorageService} from "../../services/storage.service";
-import {UpdateUserUseCase} from "../../usecases/user/updateuser.usecase";
-import {ReadUserUseCase} from "../../usecases/user/readuser.usecase";
+import {UserUseCase} from "../../usecases/user.usecase";
+import {TranslateService} from "@ngx-translate/core";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Component({
   selector: "profile",
@@ -21,23 +22,39 @@ export class ProfileComponent implements AfterViewInit {
     surname: new FormControl('', [Validators.required]),
   });
 
-  constructor(private updateUserUseCase: UpdateUserUseCase,
-              private readUserUseCase: ReadUserUseCase) {
+  constructor(private snackBar: MatSnackBar,
+              private userUseCase: UserUseCase,
+              private translateService: TranslateService) {
     EventService.get("loading").subscribe(data => this.loading = data);
   }
 
   private updateForm(userDto: UserDto) {
     StorageService.setUser(userDto);
+
     this.form.get("email")?.setValue(userDto.login);
     this.form.get("name")?.setValue(userDto.name);
     this.form.get("surname")?.setValue(userDto.surname);
+
+    EventService.get("loading").next(false)
   }
 
   ngAfterViewInit() {
     setTimeout(() => {
       EventService.get("loading").next(true)
 
-      this.readUserUseCase.read(this.updateForm, this);
+      this.userUseCase.get()
+        .then(response => {
+          this.updateForm(response.userDto)
+        })
+        .catch(() => {
+          this.snackBar.open(
+            this.translateService.instant("errors.loadingUser"),
+            this.translateService.instant("close"),
+            {duration: 2000, horizontalPosition: "right", verticalPosition: "top"}
+          );
+
+          EventService.get("loading").next(false)
+        });
     }, 10)
   }
 
@@ -51,7 +68,25 @@ export class ProfileComponent implements AfterViewInit {
         surname: this.form.get("surname")?.value,
       }
 
-      this.updateUserUseCase.update(request, this.updateForm, this);
+      this.userUseCase.update(request)
+        .then(response => {
+          this.updateForm(response.user)
+
+          this.snackBar.open(
+            this.translateService.instant("success.userUpdate"),
+            this.translateService.instant("close"),
+            {duration: 2000, horizontalPosition: "right", verticalPosition: "top"}
+          );
+        })
+        .catch(() => {
+          this.snackBar.open(
+            this.translateService.instant("errors.updateUser"),
+            this.translateService.instant("close"),
+            {duration: 2000, horizontalPosition: "right", verticalPosition: "top"}
+          );
+
+          EventService.get("loading").next(false)
+        });
     }
   }
 

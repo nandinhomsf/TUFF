@@ -1,8 +1,8 @@
 import { Injectable } from "@angular/core";
 import {ActivatedRouteSnapshot, Router} from "@angular/router";
-import {Configuration, LoginControllerService, UserAccountControllerService} from "../openapi";
+import {Configuration, LoginControllerService, ReadUserResponse, UserAccountControllerService} from "../openapi";
 import {StorageService} from "../services/storage.service";
-import {catchError, map, Observable, of} from "rxjs";
+import {firstValueFrom, Observable} from "rxjs";
 import {TokenModel} from "../models/token.model";
 
 @Injectable({providedIn: "root"})
@@ -12,7 +12,8 @@ export class AuthenticationGuard {
 
   constructor(private userAccountControllerService: UserAccountControllerService,
               private loginControllerService: LoginControllerService,
-              private router: Router) {}
+              private router: Router) {
+  }
 
   private navigateToInvalid(route: ActivatedRouteSnapshot) {
     if (!this.validNegate.has(route.routeConfig?.path!)) {
@@ -26,14 +27,16 @@ export class AuthenticationGuard {
     }
   }
 
-  private setAuthorization() {
-    const token = StorageService.getToken();
+  private setAuthorization(): Observable<ReadUserResponse> {
+    const token: TokenModel | undefined = StorageService.getToken();
 
     this.setConfiguration(this.userAccountControllerService.configuration, token);
     this.setConfiguration(this.loginControllerService.configuration, token);
+
+    return this.userAccountControllerService.read1();
   }
 
-  canActivate(route: ActivatedRouteSnapshot): Observable<boolean> | Promise<boolean> | boolean {
+  canActivate(route: ActivatedRouteSnapshot): Promise<boolean> | boolean {
     const token = StorageService.getToken();
     const currentDate = new Date();
     const expirationDate = token?.getExpiration();
@@ -45,21 +48,27 @@ export class AuthenticationGuard {
     }
 
     const request = {token: token.getAuthenticationValue()};
-    return this.loginControllerService
-      .verify(request)
-      .pipe(
-        map((data) => {
-          if (data.valid) {
-            this.setAuthorization();
-            return true;
-          }
-          this.navigateToInvalid(route);
-          return false;
-        }),
-        catchError(() => {
-          this.navigateToInvalid(route);
-          return of(false);
-        })
-      );
+
+    return firstValueFrom(this.loginControllerService.verify(request))
+      .then(data => {
+        if (data.valid) {
+          return firstValueFrom(this.setAuthorization())
+            .then(response => {
+              StorageService.setUser(response.userDto);
+              return true;
+            })
+            .catch(() => {
+              this.navigateToInvalid(route);
+              return false;
+            });
+        }
+
+        this.navigateToInvalid(route);
+        return false;
+      })
+      .catch(() => {
+        this.navigateToInvalid(route);
+        return false;
+      });
   }
 }

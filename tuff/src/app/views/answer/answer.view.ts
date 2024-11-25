@@ -8,7 +8,7 @@ import * as ace from "ace-builds";
 import {ThemeService} from "../../services/theme.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {TranslateService} from "@ngx-translate/core";
-import {ReadAnswerUseCase} from "../../usecases/answer/readanswer.usecase";
+import {AnswersUseCase} from "../../usecases/answers.usecase";
 
 @Component({
   selector: "answer",
@@ -41,8 +41,8 @@ export class AnswerView implements AfterViewInit {
 
   constructor(private route: ActivatedRoute,
               private snackBar: MatSnackBar,
+              private answersUseCase: AnswersUseCase,
               private translateService: TranslateService,
-              private readAnswerUseCase: ReadAnswerUseCase,
               private readChallengeUseCase: ReadChallengeUseCase) {
     this.route.params.subscribe(() => {
       this.route.queryParams.subscribe(params => {
@@ -69,7 +69,8 @@ export class AnswerView implements AfterViewInit {
   }
 
   async loadInformation() {
-    const answerValid = await this.readAnswerUseCase.read(this.answerId!)
+    const answerValid = await this.answersUseCase
+      .get(this.answerId!)
       .then((answer) => {
         this.answer = answer;
         this.result = answer.challengeResult;

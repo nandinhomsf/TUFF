@@ -8,7 +8,7 @@ import * as ace from "ace-builds";
 import {ThemeService} from "../../services/theme.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {TranslateService} from "@ngx-translate/core";
-import {AnswerUseCase} from "../../usecases/answer/answer.usecase";
+import {AnswersUseCase} from "../../usecases/answers.usecase";
 import {StorageService} from "../../services/storage.service";
 
 @Component({
@@ -45,9 +45,9 @@ public class MainTest {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private snackBar: MatSnackBar,
+              private answersUseCase: AnswersUseCase,
               private translateService: TranslateService,
-              private readChallengeUseCase: ReadChallengeUseCase,
-              private answerUseCase: AnswerUseCase) {
+              private readChallengeUseCase: ReadChallengeUseCase) {
     this.route.params.subscribe(() => {
       this.route.queryParams.subscribe(params => {
         this.challengeId = params['challengeId'];
@@ -121,7 +121,7 @@ public class MainTest {
         username: StorageService.getUser()?.username,
         testAnswer: this.test
       }
-      this.answerUseCase.answer(answerRequest)
+      this.answersUseCase.search(answerRequest)
         .then(() => {
           this.snackBar.open(
             this.translateService.instant("challenge-text.test-running"),
