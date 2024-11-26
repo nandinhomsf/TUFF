@@ -1,4 +1,9 @@
 {
+  "coverage": {
+    "info": "Code Coverage",
+    "instruction": "Instruction coverage: ",
+    "branch": "Branch coverage: "
+  },
   "blue": "Blue Ocean",
   "green": "Green Field",
   "yellow": "Sundown",
@@ -37,6 +42,9 @@
   "killedStatus": "Dead: ",
   "true": "Yes",
   "false": "No",
+  "line": "Line: ",
+  "covered": "Covered",
+  "uncovered": "Uncovered",
   "mutationLine": "Mutation Line: ",
   "mutationMethod": "Mutation Method: ",
   "confirmationEmail": "Confirmation email sent to: ",

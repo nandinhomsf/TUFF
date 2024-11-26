@@ -26,7 +26,7 @@
       </mat-grid-tile>
 
       <mat-grid-tile colspan="1" rowspan="2">
-        <mat-form-field appearance="outline" class="field-value">
+        <mat-form-field appearance="outline" class="field-value" (click)="openDialog('instruction')">
           <mat-label>{{'instructions' | translate}}</mat-label>
           <input readonly matInput placeholder="Instruction" value="{{(result?.instructionCoverage || 0)}} / {{(result?.instructionCoverage || 0) + (result?.instructionMissed || 0)}}">
           <mat-icon color="primary" matSuffix>lists</mat-icon>
@@ -34,7 +34,7 @@
       </mat-grid-tile>
 
       <mat-grid-tile colspan="1" rowspan="2">
-        <mat-form-field appearance="outline" class="field-value">
+        <mat-form-field appearance="outline" class="field-value" (click)="openDialog('branch')">
           <mat-label>{{'branchs' | translate}}</mat-label>
           <input readonly matInput placeholder="Branch" value="{{(result?.branchCoverage || 0)}} / {{(result?.branchCoverage || 0) + (result?.branchMissed || 0)}}">
           <mat-icon color="primary" matSuffix>fork_left</mat-icon>
@@ -42,7 +42,7 @@
       </mat-grid-tile>
 
       <mat-grid-tile colspan="1" rowspan="2">
-        <mat-form-field appearance="outline" class="field-value">
+        <mat-form-field appearance="outline" class="field-value" (click)="openDialog('line')">
           <mat-label>{{'lines' | translate}}</mat-label>
           <input readonly matInput placeholder="Lines" value="{{(result?.lineCoverage || 0)}} / {{(result?.lineCoverage || 0) + (result?.lineMissed || 0)}}">
           <mat-icon color="primary" matSuffix>east</mat-icon>
@@ -66,7 +66,7 @@
       </mat-grid-tile>
 
       <mat-grid-tile colspan="1" rowspan="2">
-        <mat-form-field appearance="outline" class="field-value">
+        <mat-form-field appearance="outline" class="field-value" (click)="openDialog('mutation')">
           <mat-label>{{'mutations' | translate}}</mat-label>
           <input readonly matInput placeholder="Mutations" value="{{(mutationsCoverage || 0)}} / {{(mutationsTotal || 0)}}">
           <mat-icon color="primary" matSuffix>face_5</mat-icon>
@@ -116,18 +116,5 @@
         </mat-card>
       </mat-grid-tile>
     </mat-grid-list>
-
-    <!-- Comentado para avaliar depois
-    <mat-accordion>
-      <mat-expansion-panel *ngFor="let mutation of result?.mutationResults!">
-        <mat-expansion-panel-header>
-          <mat-panel-title>{{('mutationType' | translate) + mutation.mutationType}}</mat-panel-title>
-          <mat-panel-description>{{('killedStatus' | translate) + (mutation.isKilled!.toString() | translate)}}</mat-panel-description>
-        </mat-expansion-panel-header>
-        <p>{{('mutationMethod' | translate) + mutation!.mutationInfo}}</p>
-        <p>{{('mutationLine' | translate) + mutation!.line}}</p>
-      </mat-expansion-panel>
-    </mat-accordion>
-    -->
   </mat-card-content>
 </mat-card>

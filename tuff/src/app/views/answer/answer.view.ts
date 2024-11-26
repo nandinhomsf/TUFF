@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ElementRef, ViewChild} from "@angular/core";
+import {AfterViewInit, Component, ElementRef, inject, ViewChild} from "@angular/core";
 import {EventService} from "../../services/event.service";
 import {ReadChallengeAnswerResponse, ReadChallengeResponse, ReadChallengeResultResponse} from "../../openapi";
 import {ActivatedRoute} from "@angular/router";
@@ -9,6 +9,8 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 import {TranslateService} from "@ngx-translate/core";
 import {AnswersUseCase} from "../../usecases/answers.usecase";
 import {ChallengeUseCase} from "../../usecases/challenge.usecase";
+import {MatDialog} from "@angular/material/dialog";
+import {LinesInfoComponent, LinesInfoData} from "../../components/lines-info/lines-info.component";
 
 @Component({
   selector: "answer",
@@ -16,6 +18,8 @@ import {ChallengeUseCase} from "../../usecases/challenge.usecase";
   styleUrls: ["./answer.view.css"],
 })
 export class AnswerView implements AfterViewInit {
+
+  dialog = inject(MatDialog);
 
   loading: boolean = false;
 
@@ -60,6 +64,17 @@ export class AnswerView implements AfterViewInit {
     });
 
     EventService.get("loading").subscribe(data => this.loading = data);
+  }
+
+  openDialog(type: string) {
+    this.dialog.open(LinesInfoComponent, {
+      data: {
+        lineList: this.result?.lineResults,
+        type: type,
+        mutationList: this.result?.mutationResults
+      } as LinesInfoData,
+      width: "80%",
+    });
   }
 
   async ngAfterViewInit() {
@@ -129,15 +144,10 @@ export class AnswerView implements AfterViewInit {
     if ((answer.challengeResult?.lineResults?.length || 0) > 0) {
       answer.challengeResult?.lineResults?.forEach(lineResult => {
         const row = lineResult.lineNumber! - 1;
+        const Range = ace.require('ace/range').Range;
+        const range = new Range(row, 0, row, 1);
 
-        if (row > 0) {
-
-          const Range = ace.require('ace/range').Range;
-          const range = new Range(row, 0, row, 1);
-          console.log(row);
-
-          aceSession.addMarker(range, lineResult.covered ? "covered" : "uncovered", "fullLine");
-        }
+        aceSession.addMarker(range, lineResult.covered ? "covered" : "uncovered", "fullLine");
       });
     }
   }

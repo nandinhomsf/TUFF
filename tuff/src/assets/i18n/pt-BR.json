@@ -1,4 +1,9 @@
 {
+  "coverage": {
+    "info": "Cobertura de Código",
+    "instruction": "Cobertura de instruções: ",
+    "branch": "Cobertura de desvios: "
+  },
   "blue": "Oceano Azul",
   "green": "Monte Verde",
   "yellow": "Protetor Solar",
@@ -37,8 +42,11 @@
   "killedStatus": "Morto: ",
   "true": "Sim",
   "false": "Não",
+  "line": "Linha: ",
+  "covered": "Coberto",
+  "uncovered": "Não Coberto",
   "mutationLine": "Linha do Mutante: ",
-  "mutationMethod": "Método do Mutante: ",
+  "mutationMethod": "Método Aplicado o Mutante: ",
   "confirmationEmail": "E-mail de confirmação enviado para: ",
   "confirmEmail": "Confirme o seu e-mail antes de continuar",
   "expiredToken": "Token expirado",
