@@ -1,12 +1,11 @@
 import {
-  ChallengeControllerService, CreateChallengeRequest,
+  ChallengeControllerService,
   ListChallengeResponse,
   ReadChallengeResponse,
   UpdateChallengeRequest
 } from "../openapi";
 import {Injectable} from "@angular/core";
 import {firstValueFrom} from "rxjs";
-import {EventService} from "../services/event.service";
 import DifficultyEnum = UpdateChallengeRequest.DifficultyEnum;
 
 @Injectable({providedIn: "root"})
@@ -23,20 +22,22 @@ export class ChallengeUseCase {
     return firstValueFrom(this.challengeControllerService.read2(challengeId));
   }
 
-  public upsert(name: string,
-                description: string,
-                code: string,
-                difficulty: DifficultyEnum,
-                challengeId: string | undefined): Promise<string> {
+  public async upsert(name: string,
+                      description: string,
+                      code: string,
+                      difficulty: DifficultyEnum,
+                      challengeId: string | undefined): Promise<string> {
     const request = {name, description, code, difficulty};
 
     if (challengeId) {
-      return firstValueFrom(this.challengeControllerService.update1(challengeId, request))
-        .then(() => challengeId);
+      await firstValueFrom(this.challengeControllerService.update1(challengeId, request));
+      return challengeId;
+    } else {
+      const response = await firstValueFrom(this.challengeControllerService.create1(request));
+      challengeId = response.id!;
     }
 
-    return firstValueFrom(this.challengeControllerService.create1(request))
-      .then(response => response.id!);
+    return challengeId!;
   }
 
   public delete(challengeId: string): Promise<void> {
