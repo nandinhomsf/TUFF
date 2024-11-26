@@ -117,10 +117,29 @@ export class AnswerView implements AfterViewInit {
     aceCodeReader.session.setTabSize(4);
     aceCodeReader.setReadOnly(true);
 
+    this.highlightCoverage(aceCodeReader.session, this.answer!);
+
     aceTestReader.session.setValue(this.answer?.userTest!);
     aceTestReader.session.setMode("ace/mode/java");
     aceTestReader.session.setTabSize(4);
     aceTestReader.setReadOnly(true);
+  }
+
+  private highlightCoverage(aceSession: ace.Ace.EditSession, answer: ReadChallengeAnswerResponse) {
+    if ((answer.challengeResult?.lineResults?.length || 0) > 0) {
+      answer.challengeResult?.lineResults?.forEach(lineResult => {
+        const row = lineResult.lineNumber! - 1;
+
+        if (row > 0) {
+
+          const Range = ace.require('ace/range').Range;
+          const range = new Range(row, 0, row, 1);
+          console.log(row);
+
+          aceSession.addMarker(range, lineResult.covered ? "covered" : "uncovered", "fullLine");
+        }
+      });
+    }
   }
 
   private setAceTheme(aceEditor: ace.Ace.Editor, darkMode: boolean) {
