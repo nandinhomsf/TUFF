@@ -7,7 +7,9 @@ import {
 import {interval, startWith, Subscription} from "rxjs";
 import {Router} from "@angular/router";
 import {EventService} from "../../services/event.service";
-import {ListAnswersUseCase} from "../../usecases/answer/listanswers.usecase";
+import {TranslateService} from "@ngx-translate/core";
+import {MatSnackBar} from "@angular/material/snack-bar";
+import {AnswersUseCase} from "../../usecases/answers.usecase";
 
 @Component({
   selector: 'runs',
@@ -31,22 +33,19 @@ export class RunsComponent implements AfterViewInit, OnDestroy {
   @ViewChild(MatPaginator) paginator!: MatPaginator;
 
   constructor(private router: Router,
-              private listAnswersUseCase: ListAnswersUseCase) {
+              private snackBar: MatSnackBar,
+              private answersUseCase: AnswersUseCase,
+              private translateService: TranslateService) {
     EventService.get("loading").subscribe(data => this.loading = data);
   }
 
   ngAfterViewInit(): void {
-    this.intervalSubscription = interval(5000).subscribe(() => {
-      const page = this.paginator.pageIndex;
-      const size = this.paginator.pageSize;
-      this.listAnswersUseCase.listAnswers(page, size, this.updateAnswers, this);
-    });
+    this.intervalSubscription = interval(5000)
+      .subscribe(() => this.updateAnswers(this.paginator.pageIndex, this.paginator.pageSize));
 
     this.paginatorSubscription = this.paginator.page
       .pipe(startWith({pageIndex: 0, pageSize: 10}))
-      .subscribe(page => {
-        this.listAnswersUseCase.listAnswers(page.pageIndex, page.pageSize, this.updateAnswers, this);
-      });
+      .subscribe(page => this.updateAnswers(page.pageIndex, page.pageSize));
   }
 
   ngOnDestroy(): void {
@@ -54,9 +53,25 @@ export class RunsComponent implements AfterViewInit, OnDestroy {
     this.paginatorSubscription?.unsubscribe();
   }
 
-  updateAnswers(listAnswerResponse: ListChallengeAnswerResponse) {
-    this.data = listAnswerResponse.answers || [];
-    this.challengesLength = listAnswerResponse.total || 0;
+  updateAnswers(page: number, size: number) {
+    const listAnswerPromise: Promise<ListChallengeAnswerResponse> = this.answersUseCase.list(page, size);
+
+    listAnswerPromise
+      .then((listAnswerResponse: ListChallengeAnswerResponse) => {
+        this.data = listAnswerResponse.answers || [];
+        this.challengesLength = listAnswerResponse.total || 0;
+      })
+      .catch(() => {
+        this.snackBar.open(
+          this.translateService.instant("errors.listChallenge"),
+          this.translateService.instant("close"),
+          {
+            duration: 2000,
+            horizontalPosition: "right",
+            verticalPosition: "top"
+          }
+        );
+      });
   }
 
   information(challengeId: string, answerId: string) {

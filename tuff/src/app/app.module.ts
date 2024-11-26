@@ -52,6 +52,8 @@ import {
   MatExpansionPanelTitle
 } from "@angular/material/expansion";
 import {EmailConfirmView} from "./views/email-confirm/email-confirm.view";
+import {LinesInfoComponent} from "./components/lines-info/lines-info.component";
+import {MatDialogActions, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -71,7 +73,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     ChallengeView,
     RunChallengeView,
     RunsComponent,
-    AnswerView
+    AnswerView,
+    LinesInfoComponent
   ],
   imports: [
     BrowserModule,
@@ -129,7 +132,10 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     MatExpansionPanelHeader,
     MatExpansionPanelTitle,
     MatExpansionPanelContent,
-    MatExpansionPanelDescription
+    MatExpansionPanelDescription,
+    MatDialogContent,
+    MatDialogTitle,
+    MatDialogActions
   ],
   providers: [
     provideRouter(routes, withHashLocation()),

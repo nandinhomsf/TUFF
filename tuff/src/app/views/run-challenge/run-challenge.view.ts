@@ -1,15 +1,15 @@
 import {AfterViewInit, Component, ElementRef, ViewChild} from "@angular/core";
 import {EventService} from "../../services/event.service";
 import {CreateChallengeAnswerRequest, ReadChallengeResponse} from "../../openapi";
-import {ReadChallengeUseCase} from "../../usecases/challenge/readchallenge.usecase";
 import {ActivatedRoute, Router} from "@angular/router";
 
 import * as ace from "ace-builds";
 import {ThemeService} from "../../services/theme.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {TranslateService} from "@ngx-translate/core";
-import {AnswerUseCase} from "../../usecases/answer/answer.usecase";
+import {AnswersUseCase} from "../../usecases/answers.usecase";
 import {StorageService} from "../../services/storage.service";
+import {ChallengeUseCase} from "../../usecases/challenge.usecase";
 
 @Component({
   selector: "run-challenge",
@@ -45,9 +45,9 @@ public class MainTest {
   constructor(private route: ActivatedRoute,
               private router: Router,
               private snackBar: MatSnackBar,
+              private answersUseCase: AnswersUseCase,
               private translateService: TranslateService,
-              private readChallengeUseCase: ReadChallengeUseCase,
-              private answerUseCase: AnswerUseCase) {
+              private challengeUseCase: ChallengeUseCase) {
     this.route.params.subscribe(() => {
       this.route.queryParams.subscribe(params => {
         this.challengeId = params['challengeId'];
@@ -72,7 +72,7 @@ public class MainTest {
   }
 
   async loadInformation() {
-    const valid = await this.readChallengeUseCase.read(this.challengeId!)
+    const valid = await this.challengeUseCase.get(this.challengeId!)
       .then((challenge) => {
         this.challenge = challenge;
         return true;
@@ -121,7 +121,7 @@ public class MainTest {
         username: StorageService.getUser()?.username,
         testAnswer: this.test
       }
-      this.answerUseCase.answer(answerRequest)
+      this.answersUseCase.search(answerRequest)
         .then(() => {
           this.snackBar.open(
             this.translateService.instant("challenge-text.test-running"),

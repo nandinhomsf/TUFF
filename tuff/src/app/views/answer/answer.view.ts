@@ -1,14 +1,16 @@
-import {AfterViewInit, Component, ElementRef, ViewChild} from "@angular/core";
+import {AfterViewInit, Component, ElementRef, inject, ViewChild} from "@angular/core";
 import {EventService} from "../../services/event.service";
 import {ReadChallengeAnswerResponse, ReadChallengeResponse, ReadChallengeResultResponse} from "../../openapi";
-import {ReadChallengeUseCase} from "../../usecases/challenge/readchallenge.usecase";
 import {ActivatedRoute} from "@angular/router";
 
 import * as ace from "ace-builds";
 import {ThemeService} from "../../services/theme.service";
 import {MatSnackBar} from "@angular/material/snack-bar";
 import {TranslateService} from "@ngx-translate/core";
-import {ReadAnswerUseCase} from "../../usecases/answer/readanswer.usecase";
+import {AnswersUseCase} from "../../usecases/answers.usecase";
+import {ChallengeUseCase} from "../../usecases/challenge.usecase";
+import {MatDialog} from "@angular/material/dialog";
+import {LinesInfoComponent, LinesInfoData} from "../../components/lines-info/lines-info.component";
 
 @Component({
   selector: "answer",
@@ -16,6 +18,8 @@ import {ReadAnswerUseCase} from "../../usecases/answer/readanswer.usecase";
   styleUrls: ["./answer.view.css"],
 })
 export class AnswerView implements AfterViewInit {
+
+  dialog = inject(MatDialog);
 
   loading: boolean = false;
 
@@ -41,9 +45,9 @@ export class AnswerView implements AfterViewInit {
 
   constructor(private route: ActivatedRoute,
               private snackBar: MatSnackBar,
+              private answersUseCase: AnswersUseCase,
               private translateService: TranslateService,
-              private readAnswerUseCase: ReadAnswerUseCase,
-              private readChallengeUseCase: ReadChallengeUseCase) {
+              private challengeUseCase: ChallengeUseCase) {
     this.route.params.subscribe(() => {
       this.route.queryParams.subscribe(params => {
         this.answerId = params['answerId'];
@@ -62,6 +66,17 @@ export class AnswerView implements AfterViewInit {
     EventService.get("loading").subscribe(data => this.loading = data);
   }
 
+  openDialog(type: string) {
+    this.dialog.open(LinesInfoComponent, {
+      data: {
+        lineList: this.result?.lineResults,
+        type: type,
+        mutationList: this.result?.mutationResults
+      } as LinesInfoData,
+      width: "80%",
+    });
+  }
+
   async ngAfterViewInit() {
     ace.config.set("basePath", "assets/ace");
 
@@ -69,7 +84,8 @@ export class AnswerView implements AfterViewInit {
   }
 
   async loadInformation() {
-    const answerValid = await this.readAnswerUseCase.read(this.answerId!)
+    const answerValid = await this.answersUseCase
+      .get(this.answerId!)
       .then((answer) => {
         this.answer = answer;
         this.result = answer.challengeResult;
@@ -82,7 +98,7 @@ export class AnswerView implements AfterViewInit {
         return false;
       });
 
-    const challengeValid = await this.readChallengeUseCase.read(this.challengeId!)
+    const challengeValid = await this.challengeUseCase.get(this.challengeId!)
       .then((challenge) => {
         this.challenge = challenge;
         return true;
@@ -116,10 +132,24 @@ export class AnswerView implements AfterViewInit {
     aceCodeReader.session.setTabSize(4);
     aceCodeReader.setReadOnly(true);
 
+    this.highlightCoverage(aceCodeReader.session, this.answer!);
+
     aceTestReader.session.setValue(this.answer?.userTest!);
     aceTestReader.session.setMode("ace/mode/java");
     aceTestReader.session.setTabSize(4);
     aceTestReader.setReadOnly(true);
+  }
+
+  private highlightCoverage(aceSession: ace.Ace.EditSession, answer: ReadChallengeAnswerResponse) {
+    if ((answer.challengeResult?.lineResults?.length || 0) > 0) {
+      answer.challengeResult?.lineResults?.forEach(lineResult => {
+        const row = lineResult.lineNumber! - 1;
+        const Range = ace.require('ace/range').Range;
+        const range = new Range(row, 0, row, 1);
+
+        aceSession.addMarker(range, lineResult.covered ? "covered" : "uncovered", "fullLine");
+      });
+    }
   }
 
   private setAceTheme(aceEditor: ace.Ace.Editor, darkMode: boolean) {

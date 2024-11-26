@@ -235,6 +235,15 @@ $altTheme: (
   @include mat.all-component-colors($altTheme);
 }
 
+.covered {
+  position: absolute;
+  background: rgba(83, 255, 83, 0.3);
+}
+.uncovered {
+  position: absolute;
+  background: rgba(255, 83, 83, 0.3);
+}
+
 // Specific component overrides, pieces that are not in line with the general theming
 
 // Handle buttons appropriately, with respect to line-height
