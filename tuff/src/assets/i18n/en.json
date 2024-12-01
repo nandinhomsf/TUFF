@@ -79,7 +79,9 @@
   },
   "success": {
     "userUpdate": "User updated",
-    "createOrUpdateChallenge": "Challenge created or updated successfully"
+    "createOrUpdateChallenge": "Challenge created or updated successfully",
+    "recoveryRequest": "Recovery request sent to your email if exists a user with this email",
+    "passwordChanged": "Password changed successfully, login again"
   },
   "challenge-text": {
     "code": "Challenge Code",
@@ -112,6 +114,8 @@
     "updateChallenge": "Error on updating challenge",
     "createChallenge": "Error on creating challenge",
     "emptyTest": "Enter the test code",
-    "errorReadingAnswer": "Error on reading challenge answer"
+    "errorReadingAnswer": "Error on reading challenge answer",
+    "invalidForm": "Invalid form",
+    "recoveryRequest": "Error on sending recovery request, request a new one"
   }
 }

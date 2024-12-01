@@ -54,6 +54,8 @@ import {
 import {EmailConfirmView} from "./views/email-confirm/email-confirm.view";
 import {LinesInfoComponent} from "./components/lines-info/lines-info.component";
 import {MatDialogActions, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
+import {RecoveryView} from "./views/recovery/recovery.view";
+import {PasswordChangeView} from "./views/password-change/password-change.view";
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -74,7 +76,9 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     RunChallengeView,
     RunsComponent,
     AnswerView,
-    LinesInfoComponent
+    LinesInfoComponent,
+    RecoveryView,
+    PasswordChangeView
   ],
   imports: [
     BrowserModule,
