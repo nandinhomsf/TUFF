@@ -8,7 +8,9 @@ import {TokenModel} from "../models/token.model";
 @Injectable({providedIn: "root"})
 export class AuthenticationGuard {
 
-  private readonly validNegate: Set<string> = new Set(["login", "register", "email-confirm"]);
+  private readonly validNegate: Set<string> = new Set(
+    ["login", "register", "email-confirm", "recovery", "login/recovery"]
+  );
 
   constructor(private userAccountControllerService: UserAccountControllerService,
               private loginControllerService: LoginControllerService,
