@@ -1,4 +1,4 @@
-import {AfterViewInit, Component, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, inject, ViewChild} from '@angular/core';
 import {MatPaginator} from "@angular/material/paginator";
 import {ReadChallengeResponse} from "../../openapi";
 import {startWith} from "rxjs";
@@ -8,6 +8,8 @@ import {EventService} from "../../services/event.service";
 import {ChallengeUseCase} from "../../usecases/challenge.usecase";
 import {TranslateService} from "@ngx-translate/core";
 import {MatSnackBar} from "@angular/material/snack-bar";
+import {ChallengeRankComponent} from "../challenge-rank/challenge-rank.component";
+import {MatDialog} from "@angular/material/dialog";
 
 @Component({
   selector: 'challenges',
@@ -16,11 +18,13 @@ import {MatSnackBar} from "@angular/material/snack-bar";
 })
 export class ChallengesComponent implements AfterViewInit {
 
+  dialog = inject(MatDialog);
+
   isAdmin: boolean = false;
 
   loading: boolean = false;
 
-  displayedColumns: string[] = ['id', 'name', 'difficulty', 'challengeVersion', 'run'];
+  displayedColumns: string[] = ['id', 'name', 'difficulty', 'challengeVersion', 'rank', 'run'];
 
   data: ReadChallengeResponse[] = [];
 
@@ -73,6 +77,16 @@ export class ChallengesComponent implements AfterViewInit {
     this.router
       .navigate(["/challenge/run"], {queryParams: {challengeId: challengeId}})
       .then(r => r || console.info("Redirect to run challenge failed"));
+  }
+
+  rank(challengeId: string) {
+    const challenge = this.data.find(c => c.id === challengeId);
+    if (challenge) {
+      this.dialog.open(ChallengeRankComponent, {
+        data: challenge.rank,
+        width: "80%",
+      });
+    }
   }
 
   edit(challengeId: string) {

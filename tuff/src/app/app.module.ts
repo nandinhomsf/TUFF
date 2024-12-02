@@ -57,6 +57,7 @@ import {MatDialogActions, MatDialogContent, MatDialogTitle} from "@angular/mater
 import {RecoveryView} from "./views/recovery/recovery.view";
 import {PasswordChangeView} from "./views/password-change/password-change.view";
 import {RankComponent} from "./components/rank/rank.component";
+import {ChallengeRankComponent} from "./components/challenge-rank/challenge-rank.component";
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
   return new TranslateHttpLoader(http);
@@ -80,7 +81,8 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     LinesInfoComponent,
     RecoveryView,
     PasswordChangeView,
-    RankComponent
+    RankComponent,
+    ChallengeRankComponent
   ],
   imports: [
     BrowserModule,
