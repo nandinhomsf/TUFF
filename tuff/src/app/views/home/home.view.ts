@@ -35,5 +35,6 @@ enum ComponentType {
   RESUME = 0,
   PROFILE = 1,
   CHALLENGES = 2,
-  RUNNING = 3
+  RUNNING = 3,
+  RANK = 4
 }

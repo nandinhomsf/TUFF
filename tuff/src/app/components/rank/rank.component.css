@@ -1,0 +1,51 @@
+mat-card {
+  width: 100%;
+}
+
+.example-container {
+  position: relative;
+}
+
+.mat-column-date {
+  width: 10%;
+}
+
+.mat-column-name {
+  width: 30%;
+}
+
+.mat-column-status {
+  width: 10%;
+}
+
+.mat-column-score {
+  width: 10%;
+}
+
+.mat-column-run {
+  width: 2%;
+}
+
+.example-table-container {
+  position: relative;
+  min-height: 200px;
+  max-height: 400px;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+.example-loading-shade {
+  position: absolute;
+  top: 0;
+  left: 0;
+  bottom: 56px;
+  right: 0;
+  background: rgba(0, 0, 0, 0.15);
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
