@@ -4,6 +4,9 @@
     "instruction": "Cobertura de instruções: ",
     "branch": "Cobertura de desvios: "
   },
+  "position": "Posição",
+  "userName": "Nome de Usuário",
+  "rank": "Ranking",
   "blue": "Oceano Azul",
   "green": "Monte Verde",
   "yellow": "Protetor Solar",
@@ -29,6 +32,7 @@
   "submit": "Enviar",
   "instructions": "Instruções",
   "running": "Execuções",
+  "ranking": "Ranking",
   "score": "Pontuação",
   "information": "Informações",
   "sendAt": "Executado em",
@@ -68,6 +72,7 @@
     }
   },
   "home": {
+    "please-enjoy": "Por favor, aproveite o TUFF, ainda estamos em desenvolvimento e você pode nos ajudar a melhorar",
     "instructor": {
       "welcome": "Bem vindo(a) Instrutor(a)",
       "createChallenge": "Criar Desafio"
@@ -116,6 +121,7 @@
     "emptyTest": "Informe o código do teste",
     "errorReadingAnswer": "Erro ao ler resposta do desafio",
     "invalidForm": "Formulário inválido",
-    "recoveryRequest": "Erro ao solicitar recuperação de senha, peça uma nova solicitação"
+    "recoveryRequest": "Erro ao solicitar recuperação de senha, peça uma nova solicitação",
+    "listRank": "Erro ao listar ranking"
   }
 }

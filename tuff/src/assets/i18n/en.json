@@ -4,6 +4,9 @@
     "instruction": "Instruction coverage: ",
     "branch": "Branch coverage: "
   },
+  "position": "Position",
+  "userName": "User Name",
+  "rank": "Ranking",
   "blue": "Blue Ocean",
   "green": "Green Field",
   "yellow": "Sundown",
@@ -29,6 +32,7 @@
   "submit": "Submit",
   "instructions": "Instructions",
   "running": "Running",
+  "ranking": "Ranking",
   "score": "Score",
   "information": "Information",
   "sendAt": "Executed At",
@@ -68,6 +72,7 @@
     }
   },
   "home": {
+    "please-enjoy": "Please enjoy our platform, we are still working on it, so if you find any bug, please report it",
     "instructor": {
       "welcome": "Welcome Instructor",
       "createChallenge": "Create Challenge"
@@ -116,6 +121,7 @@
     "emptyTest": "Enter the test code",
     "errorReadingAnswer": "Error on reading challenge answer",
     "invalidForm": "Invalid form",
-    "recoveryRequest": "Error on sending recovery request, request a new one"
+    "recoveryRequest": "Error on sending recovery request, request a new one",
+    "listRank": "Error on listing rank"
   }
 }

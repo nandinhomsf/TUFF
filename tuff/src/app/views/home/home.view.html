@@ -28,11 +28,19 @@
       <mat-icon>sync</mat-icon>
       {{ 'running' | translate }}
     </button>
+    <button color="{{buttonColor(ComponentType.RANK)}}"
+            (click)="selectComponent(ComponentType.RANK)"
+            mat-fab
+            extended>
+      <mat-icon>star</mat-icon>
+      {{ 'rank' | translate }}
+    </button>
   </mat-drawer>
   <mat-drawer-content>
     <resume *ngIf="isSelected(ComponentType.RESUME)"></resume>
     <profile *ngIf="isSelected(ComponentType.PROFILE)"></profile>
     <challenges *ngIf="isSelected(ComponentType.CHALLENGES)"></challenges>
     <runs *ngIf="isSelected(ComponentType.RUNNING)"></runs>
+    <rank *ngIf="isSelected(ComponentType.RANK)"></rank>
   </mat-drawer-content>
 </mat-drawer-container>

@@ -34,6 +34,19 @@
           <td mat-cell *matCellDef="let row">{{row.challengeVersion}}</td>
         </ng-container>
 
+        <!-- Rank Column -->
+        <ng-container matColumnDef="rank">
+          <th mat-header-cell *matHeaderCellDef></th>
+          <td mat-cell *matCellDef="let row">
+            <button mat-icon-button
+                    color="primary"
+                    (click)="rank(row.id)"
+                    matTooltip="{{'rank' | translate}}">
+              <mat-icon>stars</mat-icon>
+            </button>
+          </td>
+        </ng-container>
+
         <!-- Run Column -->
         <ng-container matColumnDef="run">
           <th mat-header-cell *matHeaderCellDef></th>
