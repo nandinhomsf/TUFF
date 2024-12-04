@@ -75,9 +75,12 @@ export class RunsComponent implements AfterViewInit, OnDestroy {
   }
 
   information(challengeId: string, answerId: string) {
+    EventService.get("loading").emit(true);
+
     console.log("Redirect to read answer");
     this.router
       .navigate(["/answer"], {queryParams: {challengeId, answerId}})
-      .then(r => r || console.info("Redirect to read answer"));
+      .then(r => r || console.info("Redirect to read answer"))
+      .finally(() => EventService.get("loading").emit(false));
   }
 }
