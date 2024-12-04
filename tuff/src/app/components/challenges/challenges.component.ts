@@ -74,9 +74,11 @@ export class ChallengesComponent implements AfterViewInit {
   }
 
   run(challengeId: string) {
+    EventService.get("loading").emit(true);
     this.router
       .navigate(["/challenge/run"], {queryParams: {challengeId: challengeId}})
-      .then(r => r || console.info("Redirect to run challenge failed"));
+      .then(r => r || console.info("Redirect to run challenge failed"))
+      .finally(() => EventService.get("loading").emit(false));
   }
 
   rank(challengeId: string) {
