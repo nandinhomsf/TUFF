@@ -60,7 +60,7 @@ import {RankComponent} from "./components/rank/rank.component";
 import {ChallengeRankComponent} from "./components/challenge-rank/challenge-rank.component";
 
 export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
-  return new TranslateHttpLoader(http);
+  return new TranslateHttpLoader(http, "./assets/i18n/", ".json");
 }
 
 @NgModule({
