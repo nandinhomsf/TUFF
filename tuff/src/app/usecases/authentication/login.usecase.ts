@@ -26,7 +26,9 @@ export class LoginUseCase {
         },
         error: error => {
           EventService.get("loading").emit(false);
-          if (error.error.message !== "label.invalid.not-verified") {
+          console.error("[LoginUseCase] Falha ao autenticar", error);
+          const message = error?.error?.message;
+          if (message !== "label.invalid.not-verified") {
             this.snackBar.open(
               this.translateService.instant("errors.login"),
               this.translateService.instant("close"),

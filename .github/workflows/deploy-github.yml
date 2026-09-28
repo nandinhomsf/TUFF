@@ -47,7 +47,6 @@ jobs:
           GIT_EMAIL: ${{ secrets.GIT_EMAIL }}
         run: |
           git config user.name "$GIT_USERNAME" && git config user.email "$GIT_EMAIL"
-          cp ./CNAME ./tuff/dist/tuff/browser/CNAME
 
       # 6 Deploy
       - name: Deploy

@@ -21,7 +21,7 @@ export class RegisterView {
     email: new FormControl('', [Validators.email, Validators.required]),
     name: new FormControl('', [Validators.required]),
     surname: new FormControl('', [Validators.required]),
-    password: new FormControl('', [Validators.min(6), Validators.required])
+    password: new FormControl('', [Validators.minLength(6), Validators.required])
   });
 
   constructor(private registerUseCase: RegisterUseCase,

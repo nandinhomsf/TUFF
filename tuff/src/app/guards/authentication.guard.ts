@@ -4,6 +4,8 @@ import {Configuration, LoginControllerService, ReadUserResponse, UserAccountCont
 import {StorageService} from "../services/storage.service";
 import {firstValueFrom, Observable} from "rxjs";
 import {TokenModel} from "../models/token.model";
+import {TranslateService} from "@ngx-translate/core";
+import {MatSnackBar} from "@angular/material/snack-bar";
 
 @Injectable({providedIn: "root"})
 export class AuthenticationGuard {
@@ -14,6 +16,8 @@ export class AuthenticationGuard {
 
   constructor(private userAccountControllerService: UserAccountControllerService,
               private loginControllerService: LoginControllerService,
+              private translateService: TranslateService,
+              private snackBar: MatSnackBar,
               private router: Router) {
   }
 
@@ -21,6 +25,16 @@ export class AuthenticationGuard {
     if (!this.validNegate.has(route.routeConfig?.path!)) {
       this.router.navigate(["login"]).then(r => r || console.info("Error when redirect"));
     }
+  }
+
+  private notifyAndInvalidate(route: ActivatedRouteSnapshot, logPrefix: string, messageKey: string, error: unknown) {
+    console.error(`[AuthenticationGuard] ${logPrefix}`, error);
+    this.snackBar.open(
+      this.translateService.instant(messageKey),
+      this.translateService.instant("close"),
+      {duration: 3000, horizontalPosition: "right", verticalPosition: "top"}
+    );
+    this.navigateToInvalid(route);
   }
 
   private setConfiguration(configuration: Configuration, token: TokenModel | undefined) {
@@ -59,8 +73,8 @@ export class AuthenticationGuard {
               StorageService.setUser(response.userDto);
               return true;
             })
-            .catch(() => {
-              this.navigateToInvalid(route);
+            .catch(error => {
+              this.notifyAndInvalidate(route, "Falha ao carregar dados do usuário autenticado", "errors.loadingUser", error);
               return false;
             });
         }
@@ -68,8 +82,8 @@ export class AuthenticationGuard {
         this.navigateToInvalid(route);
         return false;
       })
-      .catch(() => {
-        this.navigateToInvalid(route);
+      .catch(error => {
+        this.notifyAndInvalidate(route, "Falha ao verificar token de autenticação", "expiredTokenMessage", error);
         return false;
       });
   }
