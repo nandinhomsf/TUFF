@@ -1,0 +1,127 @@
+{
+  "coverage": {
+    "info": "Code Coverage",
+    "instruction": "Instruction coverage: ",
+    "branch": "Branch coverage: "
+  },
+  "position": "Position",
+  "userName": "User Name",
+  "rank": "Ranking",
+  "blue": "Blue Ocean",
+  "green": "Green Field",
+  "yellow": "Sundown",
+  "profile": "Profile",
+  "email": "Email",
+  "name": "Name",
+  "surname": "Surname",
+  "password": "Password",
+  "register": "Register",
+  "login": "Login",
+  "save": "Save",
+  "close": "Close",
+  "resume": "Resume",
+  "description": "Description",
+  "code": "Code",
+  "challenge": "Challenge",
+  "challenges": "Challenges",
+  "version": "Version",
+  "edit": "Edit",
+  "delete": "Delete",
+  "run": "Run",
+  "test": "Test Code",
+  "submit": "Submit",
+  "instructions": "Instructions",
+  "running": "Running",
+  "ranking": "Ranking",
+  "score": "Score",
+  "information": "Information",
+  "sendAt": "Executed At",
+  "tests": "Tests",
+  "branchs": "Branchs",
+  "lines": "Lines",
+  "complexity": "Complexity",
+  "methods": "Methods",
+  "mutations": "Mutations",
+  "mutationType": "Mutation Type: ",
+  "killedStatus": "Dead: ",
+  "true": "Yes",
+  "false": "No",
+  "line": "Line: ",
+  "covered": "Covered",
+  "uncovered": "Uncovered",
+  "mutationLine": "Mutation Line: ",
+  "mutationMethod": "Mutation Method: ",
+  "confirmationEmail": "Confirmation email sent to: ",
+  "confirmEmail": "Confirm your email before continue",
+  "expiredToken": "Expired token",
+  "expiredTokenMessage": "Your token has expired, please login again to generate a new token",
+  "passwordForgot": "Forgot password",
+  "validations": {
+    "email": {
+      "required": "Enter email",
+      "valid": "Enter a valid email"
+    },
+    "name": {
+      "required": "Enter name"
+    },
+    "surname": {
+      "required": "Enter surname"
+    },
+    "password": {
+      "required": "Enter password"
+    }
+  },
+  "home": {
+    "please-enjoy": "Please enjoy our platform, we are still working on it, so if you find any bug, please report it",
+    "instructor": {
+      "welcome": "Welcome Instructor",
+      "createChallenge": "Create Challenge"
+    },
+    "normal": {
+      "welcome": "Welcome user",
+      "baseText": "This is a platform to test your testing skills. Good luck!"
+    }
+  },
+  "success": {
+    "userUpdate": "User updated",
+    "createOrUpdateChallenge": "Challenge created or updated successfully",
+    "recoveryRequest": "Recovery request sent to your email if exists a user with this email",
+    "passwordChanged": "Password changed successfully, login again"
+  },
+  "challenge-text": {
+    "code": "Challenge Code",
+    "test-running": "Running test..."
+  },
+  "difficulty": {
+    "label": "Difficulty",
+    "select": "Select difficulty",
+    "EASY": "Easy",
+    "NORMAL": "Normal",
+    "MEDIUM": "Medium",
+    "HARD": "Hard"
+  },
+  "status": {
+    "label": "Status",
+    "PENDING": "Pending",
+    "PROCESSING": "Processing",
+    "CORRECT": "Correct",
+    "INCORRECT": "Incorrect"
+  },
+  "errors": {
+    "register": "Error on registering",
+    "login": "Error on log in",
+    "loadingUser": "Error on loading user data",
+    "updateUser": "Error on update user data",
+    "listChallenge": "Error on listing challenges",
+    "listAnswers": "Error on listing answers",
+    "readChallenge": "Error on reading challenge",
+    "createOrUpdateChallenge": "Error on creating or updating challenge",
+    "updateChallenge": "Error on updating challenge",
+    "createChallenge": "Error on creating challenge",
+    "emptyTest": "Enter the test code",
+    "errorReadingAnswer": "Error on reading challenge answer",
+    "invalidForm": "Invalid form",
+    "recoveryRequest": "Error on sending recovery request, request a new one",
+    "listRank": "Error on listing rank"
+  }
+}

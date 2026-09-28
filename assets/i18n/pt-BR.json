@@ -1,0 +1,127 @@
+{
+  "coverage": {
+    "info": "Cobertura de Código",
+    "instruction": "Cobertura de instruções: ",
+    "branch": "Cobertura de desvios: "
+  },
+  "position": "Posição",
+  "userName": "Nome de Usuário",
+  "rank": "Ranking",
+  "blue": "Oceano Azul",
+  "green": "Monte Verde",
+  "yellow": "Protetor Solar",
+  "profile": "Perfil",
+  "email": "E-mail",
+  "name": "Nome",
+  "surname": "Sobrenome",
+  "password": "Senha",
+  "register": "Registro",
+  "login": "Logar",
+  "save": "Salvar",
+  "close": "Fechar",
+  "resume": "Resumo",
+  "description": "Descrição",
+  "code": "Código",
+  "challenge": "Desafio",
+  "challenges": "Desafios",
+  "version": "Versão",
+  "edit": "Editar",
+  "delete": "Deletar",
+  "run": "Run",
+  "test": "Código do Teste",
+  "submit": "Enviar",
+  "instructions": "Instruções",
+  "running": "Execuções",
+  "ranking": "Ranking",
+  "score": "Pontuação",
+  "information": "Informações",
+  "sendAt": "Executado em",
+  "tests": "Testes",
+  "branchs": "Desvios",
+  "lines": "Linhas",
+  "complexity": "Complexidade",
+  "methods": "Métodos",
+  "mutations": "Mutantes",
+  "mutationType": "Tipo de Mutante: ",
+  "killedStatus": "Morto: ",
+  "true": "Sim",
+  "false": "Não",
+  "line": "Linha: ",
+  "covered": "Coberto",
+  "uncovered": "Não Coberto",
+  "mutationLine": "Linha do Mutante: ",
+  "mutationMethod": "Método Aplicado o Mutante: ",
+  "confirmationEmail": "E-mail de confirmação enviado para: ",
+  "confirmEmail": "Confirme o seu e-mail antes de continuar",
+  "expiredToken": "Token expirado",
+  "expiredTokenMessage": "Seu token expirou, por favor faça login novamente para gerar um novo token",
+  "passwordForgot": "Esqueci minha senha",
+  "validations": {
+    "email": {
+      "required": "Informe o e-mail",
+      "valid": "Informe um e-mail válido"
+    },
+    "name": {
+      "required": "Informe seu nome"
+    },
+    "surname": {
+      "required": "Informe seu sobrenome"
+    },
+    "password": {
+      "required": "Informe a senha"
+    }
+  },
+  "home": {
+    "please-enjoy": "Por favor, aproveite o TUFF, ainda estamos em desenvolvimento e você pode nos ajudar a melhorar",
+    "instructor": {
+      "welcome": "Bem vindo(a) Instrutor(a)",
+      "createChallenge": "Criar Desafio"
+    },
+    "normal": {
+      "welcome": "Bem vindo(a) usuário",
+      "baseText": "Aqui você pode resolver desafios para praticar e treinar seus conhecimentos sobre testes"
+    }
+  },
+  "success": {
+    "userUpdate": "Usuário atualizado",
+    "createOrUpdateChallenge": "Desafio criado ou atualizado com sucesso",
+    "recoveryRequest": "Solicitação de recuperação enviada para o seu e-mail se existir um usuário com este e-mail",
+    "passwordChanged": "Senha alterada com sucesso, faça login novamente"
+  },
+  "challenge-text": {
+    "code": "Código do Desafio",
+    "test-running": "Testando código..."
+  },
+  "difficulty": {
+    "label": "Dificuldade",
+    "select": "Selecione a dificuldade",
+    "EASY": "Fácil",
+    "NORMAL": "Normal",
+    "MEDIUM": "Médio",
+    "HARD": "Difícil"
+  },
+  "status": {
+    "label": "Status",
+    "PENDING": "Pendente",
+    "PROCESSING": "Processando",
+    "CORRECT": "Correto",
+    "INCORRECT": "Incorreto"
+  },
+  "errors": {
+    "register": "Erro ao realizar registro",
+    "login": "Erro ao logar",
+    "loadingUser": "Erro ao carregar dados do usuário",
+    "updateUser": "Erro ao atualizar dados do usuário",
+    "listChallenge": "Erro ao listar desafios",
+    "listAnswers": "Erro ao listar respostas",
+    "readChallenge": "Erro ao ler desafio",
+    "createOrUpdateChallenge": "Erro ao criar ou atualizar desafio",
+    "updateChallenge": "Erro ao atualizar desafio",
+    "createChallenge": "Erro ao criar desafio",
+    "emptyTest": "Informe o código do teste",
+    "errorReadingAnswer": "Erro ao ler resposta do desafio",
+    "invalidForm": "Formulário inválido",
+    "recoveryRequest": "Erro ao solicitar recuperação de senha, peça uma nova solicitação",
+    "listRank": "Erro ao listar ranking"
+  }
+}
