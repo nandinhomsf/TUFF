@@ -56,7 +56,7 @@ export class AppComponent implements OnInit{
     const htmlLink = document.createElement("link");
     htmlLink.id = "tuff-theme";
     htmlLink.rel = "stylesheet";
-    htmlLink.href = `/${themeEntry}.css`;
+    htmlLink.href = `${themeEntry}.css`;
 
     const head = document.getElementsByTagName("head")[0];
     head.appendChild(htmlLink);
