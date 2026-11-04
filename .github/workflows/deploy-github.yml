@@ -32,7 +32,23 @@ jobs:
           restore-keys: |
             ${{ runner.os }}-node-
 
-      # 4. Build Angular
+      # 4. Wake up backend
+      - name: Wait for backend to be ready
+        run: |
+          echo "Aguardando https://ffut.onrender.com/api-docs responder (o Render free tier dorme e demora pra acordar)..."
+          for i in $(seq 1 30); do
+            status=$(curl -s -o /dev/null -w "%{http_code}" https://ffut.onrender.com/api-docs)
+            if [ "$status" = "200" ]; then
+              echo "Backend respondeu 200 na tentativa $i."
+              exit 0
+            fi
+            echo "Tentativa $i: status $status, esperando 10s..."
+            sleep 10
+          done
+          echo "Backend nao respondeu a tempo."
+          exit 1
+
+      # 5. Build Angular
       - name: Build Angular Application
         working-directory: ./tuff
         run: |
@@ -40,7 +56,7 @@ jobs:
           npm run openapi-prod
           npm run build
           
-      # 5. Set Credentials
+      # 6. Set Credentials
       - name: Set Credentials
         env:
           GIT_USERNAME: ${{ secrets.GIT_USERNAME }}
@@ -48,7 +64,7 @@ jobs:
         run: |
           git config user.name "$GIT_USERNAME" && git config user.email "$GIT_EMAIL"
 
-      # 6 Deploy
+      # 7. Deploy
       - name: Deploy
         run: |
           git checkout --orphan gh-pages
