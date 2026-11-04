@@ -43,11 +43,6 @@ export class LoginView {
     this.router.navigate(["register"]).then(r => r || console.info("Redirect to login failed"));
   }
 
-  resetPassword(event: Event) {
-    event.preventDefault();
-    this.router.navigate(["recovery"]).then(r => r || console.info("Redirect to reset password failed"));
-  }
-
   private home() {
     this.router.navigate([""]).then(r => r || console.info("Redirect to home failed"));
   }

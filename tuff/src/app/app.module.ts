@@ -54,8 +54,6 @@ import {
 import {EmailConfirmView} from "./views/email-confirm/email-confirm.view";
 import {LinesInfoComponent} from "./components/lines-info/lines-info.component";
 import {MatDialogActions, MatDialogContent, MatDialogTitle} from "@angular/material/dialog";
-import {RecoveryView} from "./views/recovery/recovery.view";
-import {PasswordChangeView} from "./views/password-change/password-change.view";
 import {RankComponent} from "./components/rank/rank.component";
 import {ChallengeRankComponent} from "./components/challenge-rank/challenge-rank.component";
 
@@ -79,8 +77,6 @@ export function HttpLoaderFactory(http: HttpClient): TranslateHttpLoader {
     RunsComponent,
     AnswerView,
     LinesInfoComponent,
-    RecoveryView,
-    PasswordChangeView,
     RankComponent,
     ChallengeRankComponent
   ],
