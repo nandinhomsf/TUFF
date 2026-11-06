@@ -19,14 +19,19 @@
     </mat-expansion-panel>
   }
   @if (data.mutationList && data.type === 'mutation') {
+    @if (lineDetailsUnavailable) {
+      <p>{{ 'coverage.lineDetailsUnavailable' | translate }}</p>
+    }
     <mat-accordion>
       <mat-expansion-panel *ngFor="let mutation of data.mutationList">
         <mat-expansion-panel-header>
-          <mat-panel-title>{{('mutationLine' | translate) + mutation!.line}}</mat-panel-title>
+          <mat-panel-title>{{mutation.line ? ('mutationLine' | translate) + mutation.line : ('mutationType' | translate) + mutation.mutationType}}</mat-panel-title>
           <mat-panel-description>{{('killedStatus' | translate) + (mutation.isKilled!.toString() | translate)}}</mat-panel-description>
         </mat-expansion-panel-header>
         <p>{{('mutationType' | translate) + mutation.mutationType}}</p>
-        <p>{{('mutationMethod' | translate) + mutation!.mutationInfo}}</p>
+        @if (mutation.mutationInfo) {
+          <p>{{('mutationMethod' | translate) + mutation!.mutationInfo}}</p>
+        }
       </mat-expansion-panel>
     </mat-accordion>
   }

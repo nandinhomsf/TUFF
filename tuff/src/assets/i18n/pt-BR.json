@@ -2,7 +2,8 @@
   "coverage": {
     "info": "Cobertura de Código",
     "instruction": "Cobertura de instruções: ",
-    "branch": "Cobertura de desvios: "
+    "branch": "Cobertura de desvios: ",
+    "lineDetailsUnavailable": "O detalhamento por linha não está disponível para este desafio."
   },
   "position": "Posição",
   "userName": "Nome de Usuário",

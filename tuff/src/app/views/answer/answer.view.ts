@@ -67,6 +67,10 @@ export class AnswerView implements AfterViewInit {
   }
 
   openDialog(type: string) {
+    if (type !== "mutation" && !this.result?.lineResults?.length) {
+      return;
+    }
+
     this.dialog.open(LinesInfoComponent, {
       data: {
         lineList: this.result?.lineResults,

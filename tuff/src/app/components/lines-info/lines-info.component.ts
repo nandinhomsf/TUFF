@@ -17,6 +17,8 @@ export class LinesInfoComponent {
 
   data: LinesInfoData = inject(MAT_DIALOG_DATA);
 
+  lineDetailsUnavailable: boolean = !!this.data.mutationList?.length
+    && this.data.mutationList.every(mutation => !mutation.line);
 
   readonly dialogRef = inject(MatDialogRef<LinesInfoComponent>);
 

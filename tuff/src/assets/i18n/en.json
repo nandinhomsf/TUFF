@@ -2,7 +2,8 @@
   "coverage": {
     "info": "Code Coverage",
     "instruction": "Instruction coverage: ",
-    "branch": "Branch coverage: "
+    "branch": "Branch coverage: ",
+    "lineDetailsUnavailable": "Line-level details are not available for this challenge."
   },
   "position": "Position",
   "userName": "User Name",
