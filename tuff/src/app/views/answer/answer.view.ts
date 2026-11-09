@@ -66,6 +66,16 @@ export class AnswerView implements AfterViewInit {
     EventService.get("loading").subscribe(data => this.loading = data);
   }
 
+  // testsSuccess guarda o "Tests run" do surefire, que inclui os testes que falharam. A nota usa
+  // esse valor desde 2024/2025 e continua igual; só a exibição desconta falhas e erros.
+  get testsRun(): number {
+    return this.result?.testsSuccess || 0;
+  }
+
+  get testsPassed(): number {
+    return Math.max(0, this.testsRun - (this.result?.testsFailed || 0) - (this.result?.testsError || 0));
+  }
+
   openDialog(type: string) {
     if (type !== "mutation" && !this.result?.lineResults?.length) {
       return;

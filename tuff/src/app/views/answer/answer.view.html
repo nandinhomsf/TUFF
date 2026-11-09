@@ -20,7 +20,7 @@
       <mat-grid-tile colspan="1" rowspan="2">
         <mat-form-field appearance="outline" class="field-value">
           <mat-label>{{'tests' | translate}}</mat-label>
-          <input readonly matInput placeholder="Test" value="{{(result?.testsSuccess || 0)}} / {{(result?.testsFailed || 0) + (result?.testsError || 0) + (result?.testsSuccess || 0)}}">
+          <input readonly matInput placeholder="Test" value="{{testsPassed}} / {{testsRun}}">
           <mat-icon color="primary" matSuffix>stars</mat-icon>
         </mat-form-field>
       </mat-grid-tile>
